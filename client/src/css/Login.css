@@ -1,0 +1,24 @@
+.app__signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15%;
+}
+
+.app__signup h2 {
+  margin-bottom: 20px;
+}
+
+.app__signup input {
+  margin-top: 12px;
+  padding: 5px;
+  padding-left: 20px;
+}
+
+.app__signup button {
+  margin-top: 20px;
+  font-size: 20px;
+  letter-spacing: 1px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
