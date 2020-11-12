@@ -105,6 +105,7 @@ function Login() {
             <div className="login__imageOverlay"></div>
             <div className="login__leftContainerContent">
               <h1>Welcome Back!</h1>
+              <p>if you have an account,</p>
               <button onClick={() => setSwitchBar(true)}>Sign in</button>
             </div>
           </div>
@@ -219,6 +220,7 @@ function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
+              <a>Forgot password?</a>
               <Button type="submit">Sign In</Button>
             </div>
           </div>
@@ -227,6 +229,7 @@ function Login() {
             <div className="signup__imageOverlay"></div>
             <div className="signup__rightContainerContent">
               <h1>Hello Friend!</h1>
+              <p>if you dont have an account,</p>
               <button onClick={() => setSwitchBar(false)}>Sign up</button>
             </div>
           </div>

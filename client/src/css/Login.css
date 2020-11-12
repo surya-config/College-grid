@@ -58,6 +58,11 @@
 
 .login__leftContainerContent > h1 {
   font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.login__leftContainerContent > p {
+  margin-bottom: -30px;
 }
 
 .login__leftContainerContent > button {
@@ -194,9 +199,15 @@
 
 .signup__rightContainerContent > h1 {
   font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.signup__rightContainerContent > p {
+  margin-bottom: 20px;
 }
 
 .signup__rightContainerContent > button {
+  margin-top: 0;
   border: 1px solid white;
   border-radius: 20px;
   width: 30%;
@@ -206,7 +217,7 @@
   text-transform: uppercase;
   font-size: 15px;
   font-weight: 500;
-  margin-top: 50px;
+
   outline: none !important;
 }
 
@@ -273,6 +284,14 @@
   color: gray !important;
 }
 
+.signup__leftContainerContent > a {
+  margin-top: 20px;
+}
+
+.signup__leftContainerContent > a:hover {
+  cursor: pointer;
+}
+
 .signup__leftContainerContent > button {
   border: 1px solid lightgray;
   border-radius: 20px;
@@ -283,7 +302,7 @@
   text-transform: uppercase;
   font-size: 15px;
   font-weight: 500;
-  margin-top: 30px;
+  margin-top: 20px;
   outline: none;
 }
 

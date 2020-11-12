@@ -17,10 +17,7 @@ router.post("/signup", async (req, res) => {
       }
     });
 
-    const token = jwt.sign(
-      { userId: user._id },
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjFhZTk5MDU1NGI1MzJjOTBjMGIzNzIiLCJpYXQiOjE1OTU1OTkyNDl9.6IzLUWfDlAmoJQLARlXP2tOOOQaH-ZEcF32HtlFnep8"
-    );
+    const token = jwt.sign({ userId: user._id }, "MY_SECRET_KEY");
     res.send({ token });
   } catch (err) {
     return res.status(422).send(err.message);
@@ -43,10 +40,7 @@ router.post("/signin", async (req, res) => {
 
   try {
     await user.comparePassword(password);
-    const token = jwt.sign(
-      { userId: user._id },
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjFhZTk5MDU1NGI1MzJjOTBjMGIzNzIiLCJpYXQiOjE1OTU1OTkyNDl9.6IzLUWfDlAmoJQLARlXP2tOOOQaH-ZEcF32HtlFnep8"
-    );
+    const token = jwt.sign({ userId: user._id }, "MY_SECRET_KEY");
     res.send("Logged on");
     console.log(token);
   } catch (err) {
