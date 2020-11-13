@@ -18,6 +18,7 @@ import PrivateRoute from "./PrivateRoute";
 
 import store from "./store";
 import { Provider } from "react-redux";
+import Navbar from "./components/Student/Dashboard/Navbar";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -50,16 +51,30 @@ function App() {
             <Route path="/login">
               <Login />
             </Route>
-
-            <Route exact path="/room" component={CreateRoom} />
-            <Route exact path="/notes" component={TeacherNotes} />
-            <Route exact path="/:roomID" component={TeacherRoom} />
-
             <PrivateRoute
               exact
               path="/student/dashboard"
               component={Dashboard}
             />
+            <Route exact path="/student/dashboard/">
+              <Home />
+              <Dashboard />
+            </Route>
+            <Route exact path="/student/dashboard/notes">
+              <Dashboard />
+              <Notes />
+            </Route>
+            <Route exact path="/student/dashboard/room">
+              <Dashboard />
+              <Room />
+            </Route>
+            <Route exact path="/student/dashboard/assessment">
+              <Dashboard />
+              <Assessment />
+            </Route>
+            <Route path="/room" component={CreateRoom} />
+            <Route path="/notes" component={TeacherNotes} />
+            <Route path="/:roomID" component={TeacherRoom} />
           </Switch>
         </BrowserRouter>
       </Provider>

@@ -77,7 +77,7 @@ const Navbar = ({ auth }) => {
           </div>
         </NavLink>
 
-        <NavLink className="navbar__link">
+        <NavLink className="navbar__link" to="/">
           <div className="navitem" onClick={(e) => handleLogout(e)}>
             <PowerSettingsNewOutlinedIcon />
             <h6>Logout</h6>

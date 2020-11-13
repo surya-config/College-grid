@@ -24,12 +24,12 @@ function Dashboard({ auth }) {
     <div>
       {auth.user.usn ? (
         <Router>
-          <div className="dashboard">
-            <div className="dashboardLeftContainer">
-              <Navbar />
-            </div>
-            <div className="dashboardRightContainer">
-              <Switch>
+          <Switch>
+            <div className="dashboard">
+              <div className="dashboardLeftContainer">
+                <Navbar />
+              </div>
+              <div className="dashboardRightContainer">
                 <Route exact path="/student/dashboard/" component={Home} />
                 <Route
                   exact
@@ -42,9 +42,9 @@ function Dashboard({ auth }) {
                   path="/student/dashboard/assessment"
                   component={Assessment}
                 />
-              </Switch>
+              </div>
             </div>
-          </div>
+          </Switch>
         </Router>
       ) : (
         (window.location.href = "/login")
