@@ -1,0 +1,242 @@
+.assessment__body {
+  display: flex;
+  flex-direction: column;
+  flex: 0.6;
+  flex-grow: 1;
+  padding-right: 40px;
+  padding-bottom: 30px;
+  overflow: hidden;
+}
+
+.assessment__bodyContainer {
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.assessment__questionBody > h1 {
+  text-align: center;
+  font-weight: 600;
+  margin-top: 30px;
+}
+
+.assessment__bodyHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delbtn {
+  font-size: 30px !important;
+  margin-top: -17px;
+  cursor: pointer;
+}
+
+.assessment__bodyHeaderComponent {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: -10px;
+  margin-left: -5px;
+  line-height: 15px;
+}
+
+.assessment__bodyHeaderComponent > span {
+  font-size: 10px;
+  color: rgb(136, 133, 133);
+  font-weight: 400;
+  margin-top: 15px;
+  margin-left: 5px;
+}
+
+.assessment__textArea {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 80px;
+  margin-top: 5px;
+  border-radius: 2px;
+  border: 1px solid rgb(233, 230, 230);
+  -webkit-box-shadow: 0px 0px 5px 1px #ededed;
+  -moz-box-shadow: 0px 0px 5px 1px #ededed;
+  box-shadow: 0px 0px 5px 1px #ededed;
+}
+
+.textarea {
+  outline: none;
+  border: none;
+  border-bottom: none;
+  resize: none;
+  padding: 10px;
+}
+
+.assessment__textAreaOptions {
+  display: flex;
+  justify-content: space-between;
+  border-top: none;
+}
+
+.characters__remaining {
+  font-size: 12px;
+  margin: 20px 10px;
+  margin-bottom: 0;
+  color: rgb(129, 120, 120);
+}
+
+.textArea__icons {
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.textArea__icon {
+  font-size: 30px !important;
+  color: rgb(133, 131, 131) !important;
+}
+
+.upload-icon {
+  padding: 10px 2px !important;
+  padding-bottom: 5px !important;
+}
+
+.saveChanges {
+  position: relative;
+  left: 80%;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  margin-top: 50px;
+  border-radius: 4px;
+}
+
+.dropbtn {
+  background-color: #fff;
+  color: black;
+  font-size: 18px !important;
+  cursor: pointer;
+  width: 100%;
+  outline: none;
+}
+
+.inputbtn {
+  color: rgb(27, 82, 233);
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-left: 0px;
+  outline: none;
+  width: 200px;
+  display: flex;
+  align-items: center;
+}
+
+.inputbtn > .MuiSvgIcon-root {
+  color: rgb(27, 82, 233) !important;
+  font-size: 22px !important;
+}
+
+.select-form {
+  width: 100%;
+  margin-top: 50px;
+}
+
+.option-item {
+  padding-top: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.option-item > .MuiSvgIcon-root {
+  font-size: 25px !important;
+}
+
+.mcqInput {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  width: 100%;
+  height: 30px;
+  margin-top: 20px;
+}
+
+.mcqAnswer {
+  margin: 0 20px;
+  flex: 0.5;
+}
+
+.mcqAnswer > label {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.mcqPoints {
+  flex: 0.5;
+}
+
+.mcq-input {
+  flex: 0.5;
+  width: 90%;
+  padding: 5px 10px;
+  outline: none;
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 3px;
+  height: 20px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.cancelbtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.cancelbtn > .MuiSvgIcon-root {
+  color: rgb(197, 33, 33) !important;
+}
+
+.uploaded-files {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.uploaded-file {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  align-items: center;
+}
+
+.uploaded-file > .MuiSvgIcon-root {
+  font-size: 25px !important;
+}
+
+.uploaded-file > p {
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden; /* "overflow" value must be different from "visible" */
+  text-overflow: ellipsis;
+}
+
+.assessment__roleInputContainer {
+  margin-top: 40px;
+}
+
+.assessment__roleInputContainer > label {
+  margin-right: 10px;
+  font-size: 16px;
+  color: rgb(105, 102, 102);
+}
+
+.assessment__roleInputContainer > input {
+  outline: none;
+  padding: 4px 5px;
+  border: 1px solid grey;
+  border-radius: 3px;
+}

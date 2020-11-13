@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { Input, Button } from "react-bootstrap";
 
@@ -15,6 +15,17 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import MailOutlinedIcon from "@material-ui/icons/MailOutlined";
 import TextFormatOutlinedIcon from "@material-ui/icons/TextFormatOutlined";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
+
+import PropTypes from "prop-types";
+import { connect, useDispatch } from "react-redux";
+import {
+  registerStudent,
+  registerTeacher,
+  loginStudent,
+  loginTeacher,
+} from "../actions/authActions";
+import classnames from "classnames";
+import { Link, useHistory, withRouter } from "react-router-dom";
 
 import "../css/Login.css";
 
@@ -71,9 +82,24 @@ const IOSSwitch = withStyles((theme) => ({
   );
 });
 
-function Login() {
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+const mapDispatchToProps = {
+  registerStudent,
+  registerTeacher,
+  loginStudent,
+  loginTeacher,
+};
+
+function Login({ auth, errors }) {
   const [switchBar, setSwitchBar] = useState(false);
   const [teacher, setTeacher] = useState(false);
+
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const [username, setUsername] = useState("");
   const [usn, setUsn] = useState("");
@@ -84,12 +110,47 @@ function Login() {
     setTeacher(!teacher);
   };
 
-  const signIn = (event) => {
-    event.preventDefault();
+  const signIn = (usn, email, password, e) => {
+    e.preventDefault();
+
+    if (teacher === true) {
+      const userData = {
+        email: email,
+        password: password,
+      };
+
+      dispatch(loginTeacher(userData, history));
+    } else {
+      const userData = {
+        usn: usn,
+        password: password,
+      };
+
+      dispatch(loginStudent(userData, history));
+    }
   };
 
-  const signUp = (event) => {
-    event.preventDefault();
+  const signUp = (name, usn, email, password, e) => {
+    e.preventDefault();
+
+    if (teacher === true) {
+      const userData = {
+        name: name,
+        email: email,
+        password: password,
+      };
+
+      dispatch(registerTeacher(userData, history));
+    } else {
+      const userData = {
+        name: name,
+        usn: usn,
+        email: email,
+        password: password,
+      };
+
+      dispatch(registerStudent(userData, history));
+    }
   };
 
   return (
@@ -164,7 +225,12 @@ function Login() {
                 />
               </div>
 
-              <Button type="submit">Sign up</Button>
+              <Button
+                type="submit"
+                onClick={(e) => signUp(username, usn, email, password, e)}
+              >
+                Sign up
+              </Button>
             </div>
           </div>
         </div>
@@ -221,7 +287,12 @@ function Login() {
                 />
               </div>
               <a>Forgot password?</a>
-              <Button type="submit">Sign In</Button>
+              <Button
+                type="submit"
+                onClick={(e) => signIn(usn, email, password, e)}
+              >
+                Sign In
+              </Button>
             </div>
           </div>
 
@@ -239,4 +310,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));

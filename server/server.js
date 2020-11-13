@@ -2,13 +2,22 @@ require("./models/User");
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const authRoutes = require("./routes/authRoutes");
-const requireAuth = require("./middlewares/requireAuth");
+const passport = require("passport");
+const users = require("./routes/api/users");
+const students = require("./routes/api/students");
+const teachers = require("./routes/api/teachers");
+var cors = require("cors");
 
 const app = express();
+app.use(cors()); // Use this after the variable declaration
 
+// Bodyparser middleware
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  })
+);
 app.use(bodyParser.json());
-app.use(authRoutes);
 
 const mongoURI =
   "mongodb+srv://Config:S8524567539516g@webproj-cluster.o8w6e.mongodb.net/users?retryWrites=true&w=majority";
@@ -27,9 +36,17 @@ mongoose.connection.on("error", () => {
   console.log("Error connecting to mongoose");
 });
 
-app.get("/", requireAuth, (req, res) => {
-  res.send("Hi there");
-});
+// app.get("/", requireAuth, (req, res) => {
+//   res.send("Hi there");
+// });
+
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require("./passport")(passport);
+// Routes
+app.use("/api/students", students);
+app.use("/api/teachers", teachers);
 
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
@@ -46,4 +63,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(8000);
+server.listen(8000, () => {
+  console.log("Listening to port 8000");
+});

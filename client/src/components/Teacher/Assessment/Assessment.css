@@ -1,0 +1,15 @@
+.assessment {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  background-color: #ededed;
+}
+
+.assessment__container {
+  display: flex;
+  background-color: white;
+  padding: 20px;
+  min-height: 90vh;
+  width: 85%;
+  margin: 3% 10%;
+}
