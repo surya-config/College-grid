@@ -1,19 +1,19 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { v1 as uuid } from "uuid";
 
-import "../css/CreateRoom.css";
-import Header from "./Header";
+import "./CreateRoom.css";
 
-const CreateRoom = (props) => {
+const CreateRoom = () => {
+  const history = useHistory();
+
   function create() {
     const id = uuid();
-    props.history.push(`/${id}`);
+    history.push(`/teacher/dashboard/class/${id}`);
   }
 
   return (
     <div>
-      <Header />
-
       <div className="create-room">
         <h3>Host a Video Chat</h3>
         <button className="create-room-btn" onClick={create}>

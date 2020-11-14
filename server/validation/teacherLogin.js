@@ -1,16 +1,16 @@
 const Validator = require("validator");
 const isEmpty = require("is-empty");
 
-module.exports = function validateLoginStudent(data) {
+module.exports = function validateLoginTeacher(data) {
   let errors = {};
   // Convert empty fields to an empty string so we can use validator functions
-  data.usn = !isEmpty(data.usn) ? data.usn.toLowerCase() : "";
+  data.email = !isEmpty(data.email) ? data.email : "";
   data.password = !isEmpty(data.password) ? data.password : "";
   // Email checks
-  if (Validator.isEmpty(data.usn)) {
-    errors.usn = "USN field is required";
-  } else if (!Validator.isAlphanumeric(data.usn)) {
-    errors.usn = "USN is invalid";
+  if (Validator.isEmpty(data.email)) {
+    errors.email = "Email field is required";
+  } else if (!Validator.isEmail(data.email)) {
+    errors.email = "Email is invalid";
   }
   // Password checks
   if (Validator.isEmpty(data.password)) {

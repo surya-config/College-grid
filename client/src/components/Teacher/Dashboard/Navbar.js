@@ -1,9 +1,9 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory, withRouter } from "react-router-dom";
 import "./Navbar.css";
 import { connect, useDispatch } from "react-redux";
 
-import { logoutUser } from "../actions/authActions";
+import { logoutUser } from "../../../actions/authActions";
 
 import AirplayOutlinedIcon from "@material-ui/icons/AirplayOutlined";
 import AssignmentOutlinedIcon from "@material-ui/icons/AssignmentOutlined";
@@ -19,11 +19,18 @@ const mapDispatchToProps = {
   logoutUser,
 };
 
-const Navbar = () => {
+const Navbar = ({ auth }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logoutUser(history));
+  };
+
   return (
     <nav className="navbar">
-      <div className="navbar__container">
+      <div className="navbar__teachercontainer">
         {/* <NavLink
         activeClassName="navbar__link--active"
         className="navbar__link"
@@ -31,15 +38,18 @@ const Navbar = () => {
       >
         Dashboard
       </NavLink> */}
-        <img
+        {/* <img
           className="teacherDashboard__logo"
           src="https://theactingcenterla.com/wp-content/uploads/2020/03/facetime-transparent-17.png"
           alt="FaceTime"
-        />
+        /> */}
+
+        <h4>{auth.user.name}</h4>
+        <h5>{auth.user.email}</h5>
         <NavLink
           activeClassName="navbar__link--active"
           className="navbar__link"
-          to="/teacher/dashboard/room"
+          to="/teacher/dashboard/class"
         >
           <div className="navitem">
             <AirplayOutlinedIcon />
@@ -67,11 +77,8 @@ const Navbar = () => {
           </div>
         </NavLink>
 
-        <NavLink
-          activeClassName="navbar__link--active"
-          className="navbar__link"
-        >
-          <div className="navitem" onClick={() => dispatch(logoutUser())}>
+        <NavLink className="navbar__link" to="/">
+          <div className="navitem" onClick={(e) => handleLogout(e)}>
             <PowerSettingsNewOutlinedIcon />
             <h6>Logout</h6>
           </div>
@@ -81,4 +88,4 @@ const Navbar = () => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navbar));

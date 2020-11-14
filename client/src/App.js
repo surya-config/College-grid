@@ -1,15 +1,23 @@
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import CreateRoom from "./components/CreateRoom";
-import TeacherRoom from "./components/TeacherRoom";
+import CreateRoom from "./components/Teacher/Room/CreateRoom";
+import TeacherRoom from "./components/Teacher/Room/TeacherRoom";
 import TeacherNotes from "./components/TeacherNotes";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Dashboard from "./components/Student/Dashboard/Dashboard";
 import Home from "./components/Student/Home/Home";
 import Notes from "./components/Student/Notes/Notes";
+
 import Assessment from "./components/Student/Assessment/Assessment";
 import Room from "./components/Student/Room/Room";
+
+import TDashboard from "./components/Teacher/Dashboard/Dashboard";
+import THome from "./components/Teacher/Home/Home";
+import TNotes from "./components/Teacher/Notes/Notes";
+import TRoom from "./components/Teacher/Room/Room";
+import TAssessment from "./components/Teacher/Assessment/Assessment";
+import MainNotes from "./components/Teacher/Notes/MainNotes/MainNotes";
 
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
@@ -18,7 +26,6 @@ import PrivateRoute from "./PrivateRoute";
 
 import store from "./store";
 import { Provider } from "react-redux";
-import Navbar from "./components/Student/Dashboard/Navbar";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -46,7 +53,7 @@ function App() {
         <BrowserRouter>
           <Switch>
             <Route path="/" exact>
-              <Redirect to="/login" />
+              <TDashboard />
             </Route>
             <Route path="/login">
               <Login />
@@ -72,9 +79,34 @@ function App() {
               <Dashboard />
               <Assessment />
             </Route>
-            <Route path="/room" component={CreateRoom} />
-            <Route path="/notes" component={TeacherNotes} />
-            <Route path="/:roomID" component={TeacherRoom} />
+            <PrivateRoute
+              exact
+              path="/teacher/dashboard"
+              component={TDashboard}
+            />
+            {/* <Route exact path="/teacher/dashboard/">
+              <THome />
+              <TDashboard />
+            </Route> */}
+            {/* <Route exact path="/teacher/dashboard/notes">
+              <TDashboard />
+              <TNotes />
+            </Route> */}
+            {/* <Route exact path="/teacher/dashboard/class">
+              <TDashboard />
+              <TRoom />
+            </Route> */}
+            {/* <Route exact path="/teacher/dashboard/assessment">
+              <TDashboard />
+              <TAssessment />
+            </Route> */}
+            {/* <Route path="/notes" component={TeacherNotes} /> */}
+
+            <Route
+              exact
+              path="/teacher/dashboard/class/:roomID"
+              component={TeacherRoom}
+            />
           </Switch>
         </BrowserRouter>
       </Provider>

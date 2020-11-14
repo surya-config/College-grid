@@ -11,29 +11,43 @@ import Notes from "../Notes/Notes";
 import Room from "../Room/Room";
 import Home from "../Home/Home";
 import Assessment from "../Assessment/Assessment";
+import TeacherRoom from "../Room/TeacherRoom";
 
-function Dashboard() {
+import MainNotes from "../Notes/MainNotes/MainNotes";
+
+function TDashboard() {
   return (
     <Router>
-      <div className="dashboard">
-        <div className="dashboardLeftContainer">
-          <Navbar />
-        </div>
-        <div className="dashboardRightContainer">
-          <Switch>
+      <Switch>
+        <div className="dashboard">
+          <div className="dashboardLeftContainer">
+            <Navbar />
+          </div>
+          <div className="dashboardRightContainer">
             <Route exact path="/teacher/dashboard/" component={Home} />
             <Route exact path="/teacher/dashboard/notes" component={Notes} />
-            <Route exact path="/teacher/dashboard/room" component={Room} />
+            <Route
+              exact
+              path="/teacher/dashboard/class/:roomID"
+              component={TeacherRoom}
+            />
+            <Route exact path="/teacher/dashboard/class" component={Room} />
+
             <Route
               exact
               path="/teacher/dashboard/assessment"
               component={Assessment}
             />
-          </Switch>
+            <Route
+              exact
+              path="/teacher/dashboard/notes/:noteId"
+              component={MainNotes}
+            />
+          </div>
         </div>
-      </div>
+      </Switch>
     </Router>
   );
 }
 
-export default withRouter(Dashboard);
+export default withRouter(TDashboard);

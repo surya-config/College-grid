@@ -1,9 +1,7 @@
-require("./models/User");
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-const users = require("./routes/api/users");
 const students = require("./routes/api/students");
 const teachers = require("./routes/api/teachers");
 var cors = require("cors");
@@ -43,7 +41,8 @@ mongoose.connection.on("error", () => {
 // Passport middleware
 app.use(passport.initialize());
 // Passport config
-require("./passport")(passport);
+require("./studentPassport")(passport);
+require("./teacherPassport")(passport);
 // Routes
 app.use("/api/students", students);
 app.use("/api/teachers", teachers);

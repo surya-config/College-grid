@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.css";
 
-function Home() {
+function THome() {
   return (
     <div className="home">
       <h1> Teacher Home</h1>
@@ -9,4 +9,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default THome;

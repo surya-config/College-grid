@@ -4,7 +4,7 @@ import "./Assessment.css";
 import Assessment__Body from "./Assessment__Body/Assessment__Body";
 import Sidebar from "./Sidebar/Sidebar";
 
-function Assessment() {
+function TAssessment() {
   return (
     <div className="assessment">
       <div className="assessment__container">
@@ -15,4 +15,4 @@ function Assessment() {
   );
 }
 
-export default Assessment;
+export default TAssessment;

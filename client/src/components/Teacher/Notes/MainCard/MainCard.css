@@ -1,0 +1,58 @@
+.mainCard {
+  width: 300px;
+  border-radius: 12px;
+  height: 250px;
+  border: 1px solid lightgray;
+  position: relative;
+  color: white;
+  margin: 20px;
+}
+
+.mainCard__banner {
+  background-color: rgb(25, 136, 75);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 30px;
+  height: 100px;
+  width: 100%;
+}
+
+.mainCard__banner > h2 {
+  font-size: 23px;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 95%;
+  margin-bottom: 0px;
+}
+
+.mainCard__banner > small {
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.mainCard__banner > p {
+  font-size: 15px;
+}
+
+.mainCard__logo {
+  position: absolute;
+  top: 65px;
+  left: 72%;
+  z-index: 999;
+  width: 65px !important;
+  height: 65px !important;
+}
+
+.mainCard__banner > h2:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

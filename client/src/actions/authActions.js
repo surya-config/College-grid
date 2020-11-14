@@ -20,7 +20,7 @@ export const registerStudent = (userData, history) => (dispatch) => {
 export const registerTeacher = (userData, history) => (dispatch) => {
   axios
     .post("/api/teachers/register", userData)
-    .then((res) => history.push("/student/dashboard/")) // re-direct to login on successful register
+    .then((res) => history.push("/teacher/dashboard/")) // re-direct to login on successful register
     .catch((err) =>
       dispatch({
         type: GET_ERRORS,
