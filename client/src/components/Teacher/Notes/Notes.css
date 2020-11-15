@@ -51,6 +51,7 @@
   height: 100vh;
   float: left;
   left: 0;
+  top: 0;
   overflow: hidden;
 }
 .tnotes__popup__wrap {

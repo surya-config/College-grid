@@ -20,7 +20,6 @@ function TNotes() {
   const [isPreviewAvailable, setIsPreviewAvailable] = useState(false); // state to show preview only for images
   const dropRef = useRef(); // React ref for managing the hover state of droppable area
 
-  console.log(course, subcode, semester);
   const removePopup = () => {
     let elem = document.querySelector(".tnotes__popup");
     elem.classList.add("tnotes__is-hidden");
