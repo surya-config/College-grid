@@ -55,25 +55,28 @@ function TMainCard() {
                 semester,
                 file_path,
                 file_mimetype,
-              }) => (
-                <div className="tmainCard__card" key={_id}>
-                  <div className="tmainCard__cardContent">
-                    <AssignmentOutlinedIcon />
-                    <h3>{course}</h3>
-                    <h6>{subcode}</h6>
+              }) => {
+                return (
+                  <div className="tmainCard__card" key={_id}>
+                    <div className="tmainCard__cardContent">
+                      <AssignmentOutlinedIcon />
+                      <h3>{course}</h3>
+                      <h6>{subcode}</h6>
+                      <p>{file_path.replace(/^.*[\\\/]/, "")}</p>
+                    </div>
+                    <div className="tmainCard__cardDownload">
+                      <a
+                        href="#/"
+                        onClick={() =>
+                          downloadFile(_id, file_path, file_mimetype)
+                        }
+                      >
+                        Download
+                      </a>
+                    </div>
                   </div>
-                  <div className="tmainCard__cardDownload">
-                    <a
-                      href="/teacher/dashboard/notes"
-                      onClick={() =>
-                        downloadFile(_id, file_path, file_mimetype)
-                      }
-                    >
-                      Download
-                    </a>
-                  </div>
-                </div>
-              )
+                );
+              }
             )
           ) : (
             <h5>No files found. Please add some.</h5>
