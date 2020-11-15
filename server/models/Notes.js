@@ -17,6 +17,13 @@ const notesSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
+    email: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+    },
     file_path: {
       type: String,
       required: true,

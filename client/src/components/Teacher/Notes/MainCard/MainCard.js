@@ -6,7 +6,14 @@ import "./MainCard.css";
 
 import AssignmentOutlinedIcon from "@material-ui/icons/AssignmentOutlined";
 
-function TMainCard() {
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+function TMainCard({ auth }) {
   const [filesList, setFilesList] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -24,15 +31,18 @@ function TMainCard() {
     getFilesList();
   }, []);
 
-  const downloadFile = async (id, path, mimetype) => {
+  const downloadFile = async (_id, file_path, file_mimetype) => {
     try {
-      const result = await axios.get(`/api/notes/download/${id}`, {
-        responseType: "blob",
-      });
-      const split = path.split("/");
-      const filename = split[split.length - 1];
-      setErrorMsg("");
-      return download(result.data, filename, mimetype);
+      await axios
+        .get(`/api/notes/download/${_id}`, {
+          responseType: "blob",
+        })
+        .then((res) => {
+          const split = file_path.split("/");
+          const filename = split[split.length - 1];
+          setErrorMsg("");
+          return download(res.data, filename, file_mimetype);
+        });
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setErrorMsg("Error while downloading file. Try again later");
@@ -53,10 +63,12 @@ function TMainCard() {
                 course,
                 subcode,
                 semester,
+                email,
+                name,
                 file_path,
                 file_mimetype,
-              }) => {
-                return (
+              }) =>
+                email === auth.user.email && (
                   <div className="tmainCard__card" key={_id}>
                     <div className="tmainCard__cardContent">
                       <AssignmentOutlinedIcon />
@@ -75,8 +87,7 @@ function TMainCard() {
                       </a>
                     </div>
                   </div>
-                );
-              }
+                )
             )
           ) : (
             <h5>No files found. Please add some.</h5>
@@ -87,4 +98,4 @@ function TMainCard() {
   );
 }
 
-export default TMainCard;
+export default connect(mapStateToProps)(TMainCard);

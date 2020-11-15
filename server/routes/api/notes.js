@@ -11,7 +11,7 @@ const upload = multer({
       cb(null, "../server/files/");
     },
     filename(req, file, cb) {
-      cb(null, `${new Date().getTime()}_${file.originalname}`);
+      cb(null, `${file.originalname}`);
     },
   }),
   limits: {
@@ -34,12 +34,14 @@ Router.post(
   upload.single("file"),
   async (req, res) => {
     try {
-      const { course, subcode, semester } = req.body;
+      const { course, subcode, semester, email, name } = req.body;
       const { path, mimetype } = req.file;
       const file = new Notes({
         course,
         subcode,
         semester,
+        email,
+        name,
         file_path: path,
         file_mimetype: mimetype,
       });
@@ -74,7 +76,7 @@ Router.get("/download/:id", async (req, res) => {
     res.set({
       "Content-Type": file.file_mimetype,
     });
-    res.sendFile(path.join(__dirname, "..", file.file_path));
+    res.sendFile(path.join(__dirname, "../../", file.file_path));
   } catch (error) {
     res.status(400).send("Error while downloading file. Try again later.");
   }

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TMainCard from "./MainCard/MainCard";
 import "./Notes.css";
 
@@ -9,7 +9,14 @@ import fileUpload from "../../../fileUpload";
 import Dropzone from "react-dropzone";
 import axios from "../../../axios";
 
-function TNotes() {
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+function TNotes({ auth }) {
   const [file, setFile] = useState(null); // state for storing actual image
   const [previewSrc, setPreviewSrc] = useState(""); // state for storing previewImage
 
@@ -64,6 +71,8 @@ function TNotes() {
           formData.append("course", course);
           formData.append("subcode", subcode);
           formData.append("semester", semester);
+          formData.append("email", auth.user.email);
+          formData.append("name", auth.user.name);
 
           setErrorMsg("");
           await axios
@@ -230,4 +239,4 @@ function TNotes() {
   );
 }
 
-export default TNotes;
+export default connect(mapStateToProps)(TNotes);

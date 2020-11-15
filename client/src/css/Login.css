@@ -317,3 +317,7 @@
   font-size: 18px;
   color: #555;
 }
+
+.red__text {
+  color: red;
+}

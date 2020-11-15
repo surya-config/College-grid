@@ -192,6 +192,9 @@ function Login({ auth, errors }) {
                   placeholder="Name"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
+                  className={classnames("", {
+                    invalid: errors.name,
+                  })}
                 />
               </div>
               {teacher === false ? (
@@ -200,8 +203,12 @@ function Login({ auth, errors }) {
                   <input
                     type="text"
                     placeholder="USN"
+                    error={errors.usn}
                     value={usn}
                     onChange={(e) => setUsn(e.target.value)}
+                    className={classnames("", {
+                      invalid: errors.usn,
+                    })}
                   />
                 </div>
               ) : null}
@@ -211,8 +218,12 @@ function Login({ auth, errors }) {
                 <input
                   type="email"
                   placeholder="Email"
+                  error={errors.email}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  className={classnames("", {
+                    invalid: errors.email,
+                  })}
                 />
               </div>
               <div className="login__input">
@@ -220,11 +231,18 @@ function Login({ auth, errors }) {
                 <input
                   type="password"
                   placeholder="Password"
+                  error={errors.password}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  className={classnames("", {
+                    invalid: errors.password,
+                  })}
                 />
               </div>
-
+              <span className="red__text">{errors.name}</span>
+              <span className="red__text">{errors.usn}</span>
+              <span className="red__text">{errors.email}</span>
+              <span className="red__text">{errors.password}</span>
               <Button
                 type="submit"
                 onClick={(e) => signUp(username, usn, email, password, e)}
@@ -262,8 +280,12 @@ function Login({ auth, errors }) {
                   <input
                     type="text"
                     placeholder="USN"
+                    error={errors.usn}
                     value={usn}
                     onChange={(e) => setUsn(e.target.value)}
+                    className={classnames("", {
+                      invalid: errors.usn,
+                    })}
                   />
                 </div>
               ) : (
@@ -272,8 +294,12 @@ function Login({ auth, errors }) {
                   <input
                     type="email"
                     placeholder="Email"
+                    error={errors.email}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className={classnames("", {
+                      invalid: errors.email || errors.emailnotfound,
+                    })}
                   />
                 </div>
               )}
@@ -282,11 +308,23 @@ function Login({ auth, errors }) {
                 <input
                   type="password"
                   placeholder="Password"
+                  error={errors.password}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  className={classnames("", {
+                    invalid: errors.password || errors.passwordincorrect,
+                  })}
                 />
               </div>
               <a>Forgot password?</a>
+              <span className="red__text">{errors.usn}</span>
+              <span className="red__text">
+                {errors.email} {errors.emailnotfound}
+              </span>
+              <span className="red__text">
+                {errors.password} {errors.passwordincorrect}
+              </span>
+
               <Button
                 type="submit"
                 onClick={(e) => signIn(usn, email, password, e)}
