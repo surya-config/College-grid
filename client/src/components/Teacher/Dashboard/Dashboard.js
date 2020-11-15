@@ -7,47 +7,103 @@ import {
   Switch,
   withRouter,
 } from "react-router-dom";
-import Notes from "../Notes/Notes";
-import Room from "../Room/Room";
-import Home from "../Home/Home";
+import TNotes from "../Notes/Notes";
+import TMainNotes from "../Notes/MainNotes/MainNotes";
+import TNotesDescription from "../Notes/NotesDescription/NotesDescription";
+import TRoom from "../Room/Room";
+import THome from "../Home/Home";
 import Assessment from "../Assessment/Assessment";
 import TeacherRoom from "../Room/TeacherRoom";
 
-import MainNotes from "../Notes/MainNotes/MainNotes";
+import Home from "../../Student/Home/Home";
+import Room from "../../Student/Room/Room";
+import SNotes from "../../Student/Notes/SNotes";
+import SMainNotes from "../../Student/Notes/MainNotes/SMainNotes";
+import SNotesDescription from "../../Student/Notes/NotesDescription/SNotesDescription";
+import StudentAssessment from "../../Student/Assessment/Assessment";
 
-function TDashboard() {
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+function TDashboard({ auth }) {
+  const teacher = auth.user.email;
+  const student = auth.user.usn;
+
   return (
     <Router>
       <Switch>
-        <div className="dashboard">
-          <div className="dashboardLeftContainer">
-            <Navbar />
-          </div>
-          <div className="dashboardRightContainer">
-            <Route exact path="/teacher/dashboard/" component={Home} />
-            <Route exact path="/teacher/dashboard/notes" component={Notes} />
-            <Route
-              exact
-              path="/teacher/dashboard/class/:roomID"
-              component={TeacherRoom}
-            />
-            <Route exact path="/teacher/dashboard/class" component={Room} />
+        {student !== undefined ? (
+          <div className="dashboard">
+            <div className="dashboardLeftContainer">
+              <Navbar />
+            </div>
+            <div className="dashboardRightContainer">
+              <Route exact path="/student/dashboard/" component={Home} />
+              <Route exact path="/student/dashboard/notes" component={SNotes} />
+              <Route
+                exact
+                path="/student/dashboard/class/:roomID"
+                component={TeacherRoom}
+              />
+              <Route exact path="/student/dashboard/room" component={Room} />
 
-            <Route
-              exact
-              path="/teacher/dashboard/assessment"
-              component={Assessment}
-            />
-            <Route
-              exact
-              path="/teacher/dashboard/notes/:noteId"
-              component={MainNotes}
-            />
+              <Route
+                exact
+                path="/student/dashboard/assessment"
+                component={StudentAssessment}
+              />
+              <Route
+                exact
+                path="/student/dashboard/notes/:noteId"
+                component={SMainNotes}
+              />
+              <Route
+                exact
+                path="/student/dashboard/notes/:noteId/:notedescId"
+                component={SNotesDescription}
+              />
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="dashboard">
+            <div className="dashboardLeftContainer">
+              <Navbar />
+            </div>
+            <div className="dashboardRightContainer">
+              <Route exact path="/teacher/dashboard/" component={Home} />
+              <Route exact path="/teacher/dashboard/notes" component={TNotes} />
+              <Route
+                exact
+                path="/teacher/dashboard/class/:roomID"
+                component={TeacherRoom}
+              />
+              <Route exact path="/teacher/dashboard/class" component={TRoom} />
+
+              <Route
+                exact
+                path="/teacher/dashboard/assessment"
+                component={Assessment}
+              />
+              <Route
+                exact
+                path="/teacher/dashboard/notes/:noteId"
+                component={TMainNotes}
+              />
+              <Route
+                exact
+                path="/teacher/dashboard/notes/:noteId/:notedescId"
+                component={TNotesDescription}
+              />
+            </div>
+          </div>
+        )}
       </Switch>
     </Router>
   );
 }
 
-export default withRouter(TDashboard);
+export default connect(mapStateToProps)(TDashboard);

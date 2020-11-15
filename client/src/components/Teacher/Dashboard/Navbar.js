@@ -30,60 +30,91 @@ const Navbar = ({ auth }) => {
 
   return (
     <nav className="navbar">
-      <div className="navbar__teachercontainer">
-        {/* <NavLink
-        activeClassName="navbar__link--active"
-        className="navbar__link"
-        to="/teacher/dashboard/"
-      >
-        Dashboard
-      </NavLink> */}
-        {/* <img
-          className="teacherDashboard__logo"
-          src="https://theactingcenterla.com/wp-content/uploads/2020/03/facetime-transparent-17.png"
-          alt="FaceTime"
-        /> */}
+      {auth.user.usn ? (
+        <div className="navbar__container">
+          <h4>{auth.user.name}</h4>
+          <h5 className="navbar__usn">{auth.user.usn}</h5>
+          <NavLink
+            activeClassName="navbar__link--active"
+            className="navbar__link"
+            to="/student/dashboard/room"
+          >
+            <div className="navitem">
+              <AirplayOutlinedIcon />
+              <h6>Classes</h6>
+            </div>
+          </NavLink>
+          <NavLink
+            activeClassName="navbar__link--active"
+            className="navbar__link"
+            to="/student/dashboard/notes"
+          >
+            <div className="navitem">
+              <AssignmentOutlinedIcon />
+              <h6>Notes</h6>
+            </div>
+          </NavLink>
+          <NavLink
+            activeClassName="navbar__link--active"
+            className="navbar__link"
+            to="/student/dashboard/assessment"
+          >
+            <div className="navitem">
+              <CreateOutlinedIcon />
+              <h6>Assessment</h6>
+            </div>
+          </NavLink>
 
-        <h4>{auth.user.name}</h4>
-        <h5>{auth.user.email}</h5>
-        <NavLink
-          activeClassName="navbar__link--active"
-          className="navbar__link"
-          to="/teacher/dashboard/class"
-        >
-          <div className="navitem">
-            <AirplayOutlinedIcon />
-            <h6>Classes</h6>
-          </div>
-        </NavLink>
-        <NavLink
-          activeClassName="navbar__link--active"
-          className="navbar__link"
-          to="/teacher/dashboard/notes"
-        >
-          <div className="navitem">
-            <AssignmentOutlinedIcon />
-            <h6>Notes</h6>
-          </div>
-        </NavLink>
-        <NavLink
-          activeClassName="navbar__link--active"
-          className="navbar__link"
-          to="/teacher/dashboard/assessment"
-        >
-          <div className="navitem">
-            <CreateOutlinedIcon />
-            <h6>Assessment</h6>
-          </div>
-        </NavLink>
+          <NavLink className="navbar__link" to="/">
+            <div className="navitem" onClick={(e) => handleLogout(e)}>
+              <PowerSettingsNewOutlinedIcon />
+              <h6>Logout</h6>
+            </div>
+          </NavLink>
+        </div>
+      ) : (
+        <div className="navbar__container">
+          <h4>{auth.user.name}</h4>
+          <h5>{auth.user.email}</h5>
+          <NavLink
+            activeClassName="navbar__link--active"
+            className="navbar__link"
+            to="/teacher/dashboard/class"
+          >
+            <div className="navitem">
+              <AirplayOutlinedIcon />
+              <h6>Classes</h6>
+            </div>
+          </NavLink>
+          <NavLink
+            activeClassName="navbar__link--active"
+            className="navbar__link"
+            to="/teacher/dashboard/notes"
+          >
+            <div className="navitem">
+              <AssignmentOutlinedIcon />
+              <h6>Notes</h6>
+            </div>
+          </NavLink>
+          <NavLink
+            activeClassName="navbar__link--active"
+            className="navbar__link"
+            to="/teacher/dashboard/assessment"
+          >
+            <div className="navitem">
+              <CreateOutlinedIcon />
+              <h6>Assessment</h6>
+            </div>
+          </NavLink>
 
-        <NavLink className="navbar__link" to="/">
-          <div className="navitem" onClick={(e) => handleLogout(e)}>
-            <PowerSettingsNewOutlinedIcon />
-            <h6>Logout</h6>
-          </div>
-        </NavLink>
-      </div>
+          <NavLink className="navbar__link" to="/">
+            <div className="navitem" onClick={(e) => handleLogout(e)}>
+              <PowerSettingsNewOutlinedIcon />
+              <h6>Logout</h6>
+            </div>
+          </NavLink>
+        </div>
+      )}
     </nav>
   );
 };

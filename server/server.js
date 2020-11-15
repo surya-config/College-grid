@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const students = require("./routes/api/students");
 const teachers = require("./routes/api/teachers");
+const notes = require("./routes/api/notes");
 var cors = require("cors");
 
 const app = express();
@@ -46,6 +47,7 @@ require("./teacherPassport")(passport);
 // Routes
 app.use("/api/students", students);
 app.use("/api/teachers", teachers);
+app.use("/api/notes", notes);
 
 const server = require("http").Server(app);
 const io = require("socket.io")(server);

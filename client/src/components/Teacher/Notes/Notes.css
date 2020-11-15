@@ -25,3 +25,141 @@
   -ms-overflow-style: none;
   scrollbar-width: none; /* Firefox */
 }
+
+.tnotes__createButton {
+  border-radius: 12px;
+  border: none;
+  color: whitesmoke;
+  background-color: #129eaf;
+  padding: 10px 20px;
+  position: absolute;
+  right: 70px;
+  top: 30px;
+  display: flex;
+  align-items: center;
+  outline: none !important;
+}
+
+.tnotes__popup {
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.259);
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  float: left;
+  left: 0;
+  overflow: hidden;
+}
+.tnotes__popup__wrap {
+  background-color: #ffffff;
+  width: 75%;
+  padding: 0px;
+  margin-top: 20px;
+  border-radius: 0.55rem;
+  max-height: calc(100% - 3.75rem);
+}
+.tnotes__popup__content {
+  width: 100%;
+  height: 95vh;
+  background-color: #ffffff;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  border-radius: 0.75rem;
+}
+
+.tnotes__is-hidden {
+  display: none;
+}
+
+.tnotes__popup__contentBanner > .MuiSvgIcon-root {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  color: #999;
+  font-size: 25px;
+}
+
+.tnotes__popup__contentBanner > .MuiSvgIcon-root:hover {
+  font-size: 30px;
+  margin-top: -2px;
+  margin-left: 2px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.tnotes__popup::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge add Firefox */
+.tnotes__popup {
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+}
+
+.tnotes__popupContentContainer {
+  margin: 100px 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.tnotes__input {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.tnotes__input > input {
+  margin-left: 20px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  padding: 5px 15px;
+  outline: none;
+}
+
+.tnotes__input > select {
+  margin-left: 20px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  padding: 5px 10px;
+  outline: none;
+  display: flex;
+  align-items: center;
+}
+
+.input__label {
+  width: 200px;
+}
+
+.input__label:after {
+  content: " *";
+  color: red;
+}
+
+.tnotes__dropzone {
+  outline: none;
+}
+
+.preview-image {
+  width: 400px;
+  height: 200px;
+}
+
+.tnotes__submitButton {
+  border-radius: 12px;
+  border: none;
+  color: whitesmoke;
+  background-color: #129eaf;
+  padding: 10px 20px;
+  position: absolute;
+  right: 70px;
+  bottom: 30px;
+  display: flex;
+  align-items: center;
+  outline: none !important;
+}

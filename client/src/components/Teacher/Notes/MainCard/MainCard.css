@@ -1,58 +1,74 @@
-.mainCard {
-  width: 300px;
-  border-radius: 12px;
-  height: 250px;
-  border: 1px solid lightgray;
-  position: relative;
-  color: white;
+.tmainCard__filesContainer {
+  margin: 100px 80px;
+}
+
+.tmainCard__files_table {
+  margin: 30px;
+}
+
+.tmainCard__files_tableRow tr {
+  margin-bottom: 20px;
+}
+
+.tmainCard__cardSection {
+  display: flex;
+  align-items: center;
   margin: 20px;
 }
 
-.mainCard__banner {
-  background-color: rgb(25, 136, 75);
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  position: absolute;
-  top: 0;
+.tmainCard__card {
+  border: 1px solid lightgray;
+  border-radius: 12px;
+  width: 200px;
+  height: 170px;
+  position: relative;
+  margin: 20px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding-top: 10px;
-  padding-left: 15px;
-  padding-right: 30px;
-  height: 100px;
-  width: 100%;
+  align-items: center;
 }
 
-.mainCard__banner > h2 {
-  font-size: 23px;
-  font-weight: 400;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 95%;
-  margin-bottom: 0px;
+.tmainCard__cardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 50px;
 }
 
-.mainCard__banner > small {
-  font-size: 13px;
-  margin-top: 5px;
+.tmainCard__cardContent > h3 {
+  font-size: #444;
+  font-size: 22px;
+  line-height: 0.7;
+  margin-top: 10px;
 }
 
-.mainCard__banner > p {
-  font-size: 15px;
+.tmainCard__cardContent > .MuiSvgIcon-root {
+  font-size: 40px !important;
+  color: #129eaf;
 }
 
-.mainCard__logo {
+.tmainCard__cardDownload {
   position: absolute;
-  top: 65px;
-  left: 72%;
-  z-index: 999;
-  width: 65px !important;
-  height: 65px !important;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #129eaf;
+  padding: 8px;
+
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
-.mainCard__banner > h2:hover {
-  text-decoration: underline;
-  cursor: pointer;
+.tmainCard__cardDownload > a {
+  color: white;
+}
+
+.tmainCard__cardDownload > a:hover {
+  opacity: 0.8;
+  color: rgb(208, 224, 230);
 }

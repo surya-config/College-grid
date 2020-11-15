@@ -1,0 +1,27 @@
+.notes {
+  border-radius: 12px;
+  background-color: white;
+  width: 100%;
+  padding: 15px;
+  overflow: scroll;
+  padding-bottom: 50px;
+}
+
+.notes__list {
+  margin: 50px 0;
+  margin-left: 40px;
+  display: flex;
+  float: left;
+  flex-wrap: wrap;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.notes__list::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge add Firefox */
+.notes__list {
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+}
