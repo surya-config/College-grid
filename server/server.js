@@ -49,6 +49,75 @@ app.use("/api/students", students);
 app.use("/api/teachers", teachers);
 app.use("/api/notes", notes);
 
+// var questionsList = db.collection("questionsList");
+
+// app.get("/questions-list", (req, res) => {
+//   questionsList.find().toArray(function (err, data) {
+//     console.log(data);
+//     if (err) {
+//       res.status(500).send(err);
+//     } else {
+//       res.status(200).send(data);
+//     }
+//   });
+// });
+
+// app.get("/questions", (req, res) => {
+//   Questions.find((err, data) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     } else {
+//       res.status(200).send(data);
+//     }
+//   });
+// });
+
+// app.post("/questions/add", (req, res) => {
+//   const question = req.body;
+//   console.log(question);
+
+//   Questions.create(question, (err, data) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     } else {
+//       res.status(201).send(data);
+//     }
+//   });
+// });
+
+// app.post("/questions/delete", (req, res) => {
+//   const id = req.body.id;
+
+//   console.log(id);
+
+//   Questions.findByIdAndDelete(id, (err, data) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     } else {
+//       res.status(201).send(data);
+//     }
+//   });
+// });
+
+// app.post("/question/update", (req, res) => {
+//   console.log(req.body);
+//   const { id, question, questionType } = req.body;
+
+//   console.log(question, questionType);
+
+//   Questions.findByIdAndUpdate(
+//     id,
+//     { question: question, question_type: questionType },
+//     (err, data) => {
+//       if (err) {
+//         res.status(500).send(err);
+//       } else {
+//         res.status(201).send(data);
+//       }
+//     }
+//   );
+// });
+
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
 

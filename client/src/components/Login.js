@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from "react";
-import Header from "./Header";
-import { Input, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 
 import { withStyles } from "@material-ui/core/styles";
-import { purple } from "@material-ui/core/colors";
-import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import MailOutlinedIcon from "@material-ui/icons/MailOutlined";
-import TextFormatOutlinedIcon from "@material-ui/icons/TextFormatOutlined";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 
-import PropTypes from "prop-types";
 import { connect, useDispatch } from "react-redux";
 import {
   registerStudent,
@@ -25,9 +18,9 @@ import {
   loginTeacher,
 } from "../actions/authActions";
 import classnames from "classnames";
-import { Link, useHistory, withRouter } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 
-import "../css/Login.css";
+import "./Login.css";
 
 const IOSSwitch = withStyles((theme) => ({
   root: {

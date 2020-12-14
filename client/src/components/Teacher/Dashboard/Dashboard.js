@@ -18,8 +18,6 @@ import TeacherRoom from "../Room/TeacherRoom";
 import Home from "../../Student/Home/Home";
 import Room from "../../Student/Room/Room";
 import SNotes from "../../Student/Notes/SNotes";
-import SMainNotes from "../../Student/Notes/MainNotes/SMainNotes";
-import SNotesDescription from "../../Student/Notes/NotesDescription/SNotesDescription";
 import StudentAssessment from "../../Student/Assessment/Assessment";
 
 import { connect } from "react-redux";
@@ -55,16 +53,6 @@ function TDashboard({ auth }) {
                 exact
                 path="/student/dashboard/assessment"
                 component={StudentAssessment}
-              />
-              <Route
-                exact
-                path="/student/dashboard/notes/:noteId"
-                component={SMainNotes}
-              />
-              <Route
-                exact
-                path="/student/dashboard/notes/:noteId/:notedescId"
-                component={SNotesDescription}
               />
             </div>
           </div>

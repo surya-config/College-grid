@@ -25,3 +25,90 @@
   -ms-overflow-style: none;
   scrollbar-width: none; /* Firefox */
 }
+
+.smainCard__cardSection {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+}
+
+.smainCard__card {
+  border: 1px solid lightgray;
+  border-radius: 12px;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.smainCard__cardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
+.smainCard__cardContent > h3 {
+  font-size: #444;
+  font-size: 22px;
+  line-height: 0.7;
+  margin-top: 10px;
+}
+
+.smainCard__cardContent > p {
+  white-space: nowrap;
+  position: relative;
+  width: 50%;
+  overflow: hidden;
+}
+
+.smainCard__cardContent > .MuiSvgIcon-root {
+  font-size: 40px !important;
+  color: #129eaf;
+}
+
+.smainCard__cardDownload {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #129eaf;
+  padding: 8px;
+
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.smainCard__cardDownload > a {
+  color: white;
+}
+
+.smainCard__cardDownload > a:hover {
+  opacity: 0.8;
+  color: rgb(208, 224, 230);
+}
+
+.notes__semesterSelection {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+.semesterSelection {
+  margin-left: 20px;
+  padding: 5px;
+  background-color: #129eaf;
+  opacity: 0.7;
+  color: white;
+  outline: none;
+  border-radius: 5px;
+}

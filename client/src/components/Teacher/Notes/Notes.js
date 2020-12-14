@@ -227,13 +227,13 @@ function TNotes({ auth }) {
             Create
           </button>
         </div>
-        <div className="tnotes__list">
+        {/* <div className="tnotes__list">
           <TMainCard
             course="Python - 17CS664 - 2020"
             semester="6"
             name="Nagraj A"
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );
