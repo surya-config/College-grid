@@ -21,6 +21,7 @@ import SNotes from "../../Student/Notes/SNotes";
 import StudentAssessment from "../../Student/Assessment/Assessment";
 
 import { connect } from "react-redux";
+import MainAssessmentPage from "../Assessment/MainAssessmentPage";
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
@@ -72,8 +73,19 @@ function TDashboard({ auth }) {
               <Route exact path="/teacher/dashboard/class" component={TRoom} />
 
               <Route
+              exact
+              path="/teacher/dashboard/assessment"
+              component={MainAssessmentPage}
+            />
+
+              <Route
                 exact
-                path="/teacher/dashboard/assessment"
+                path="/teacher/dashboard/assessment/quiz"
+                component={Assessment}
+              />
+              <Route
+                exact
+                path="/teacher/dashboard/assessment/quiz/:id"
                 component={Assessment}
               />
               <Route

@@ -21,18 +21,32 @@ import {
   IconButton,
 } from "@material-ui/core";
 
-function Assessment__Body() {
+
+import { connect, useDispatch } from "react-redux";
+
+import {
+  setQuestionId
+} from "../../../../actions/authActions";
+
+const mapStateToProps = (state) => ({
+  question_id: state.question_id
+});
+
+
+const mapDispatchToProps = {
+  setQuestionId
+};
+
+function Assessment__Body({question_id}) {
   const [questions, setQuestions] = useState([]);
-  const [question, setQuestion] = useState("");
-  const [questionType, setQuestionType] = useState("Choose Question type");
+  const [question, setQuestion] = useState([]);
+  const [input, setInput] = useState("");
 
   const [inputList, setInputList] = useState([{ answer: "", points: "" }]);
   const { id } = useParams();
 
   const [selectedFile, setSelectedFile] = useState([]);
   const [selectedFilesArray, setSelectedFilesArray] = useState([]);
-  const [role, setRole] = useState("");
-  const [tag, setTag] = useState("");
 
   useEffect(() => {
     axios.get("/questions").then((response) => {
@@ -40,21 +54,38 @@ function Assessment__Body() {
     });
   }, [questions]);
 
+  useEffect(() => {
+   setInput("")
+   setQuestion([...question, input])
+  }, [input])
+
+  console.log({question})
+
+  React.useEffect(() => {
+    localStorage.setItem("questionsArray", questions)
+  }, [questions])
+
   const selectedQuestion = questions.filter((item) => item._id === id);
   const selectedQuestionIndex = questions.findIndex((item) => item._id === id);
 
   // const selectedQuestionID = selectedQuestion.map((item) => item._id);
   const selectedQn = selectedQuestion.map((item) => item.question);
 
+  useEffect(() => {
+    setQuestion(selectedQn.question)
+  }, [selectedQn])
+
+
   const handleQuestionChange = (e) => {
     e.preventDefault();
-    setQuestion(e.target.value);
+
+    if(question_id === id){
+      setInput(e.target.value);
+    }
+   
   };
 
-  const handleTypeChange = (e) => {
-    e.preventDefault();
-    setQuestionType(e.target.value);
-  };
+
 
   const handleSubmit = (id) => {
     //const formData = new FormData();
@@ -80,9 +111,7 @@ function Assessment__Body() {
     const qn = {
       id: id,
       question: question,
-      questionType: questionType,
-      mcqAnswers: inputList,
-      formData: selectedFilesArray,
+      options: inputList,
     };
 
     console.log(qn);
@@ -160,164 +189,23 @@ function Assessment__Body() {
                 cols="100"
                 placeholder={selectedQn}
                 value={question}
+                defaultValue={selectedQn?.question}
                 onChange={handleQuestionChange}
               />
-              <div className="uploaded-files">
-                {selectedFilesArray.map((item) => (
-                  <div className="uploaded-file">
-                    <InsertDriveFileIcon />
-                    <p>{item.name}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="assessment__textAreaOptions">
-                <div className="characters__remaining">
-                  1524 characters remaining
-                </div>
-                <div className="textArea__icons">
-                  <div className="upload-input-container">
-                    <input
-                      accept="image/*"
-                      id="icon-button-photo"
-                      type="file"
-                      style={{ display: "none" }}
-                      onChange={handleFileChange}
-                      multiple
-                    />
-                    <label htmlFor="icon-button-photo">
-                      <IconButton
-                        className="upload-icon"
-                        color="primary"
-                        component="span"
-                      >
-                        <PhotoOutlinedIcon className="textArea__icon" />
-                      </IconButton>
-                    </label>
-                  </div>
-
-                  <div className="upload-input-container">
-                    <input
-                      accept="video/*"
-                      id="icon-button-video"
-                      type="file"
-                      style={{ display: "none" }}
-                      onChange={handleFileChange}
-                      multiple
-                    />
-                    <label htmlFor="icon-button-video">
-                      <IconButton
-                        className="upload-icon"
-                        color="primary"
-                        component="span"
-                      >
-                        <VideocamOutlinedIcon className="textArea__icon" />
-                      </IconButton>
-                    </label>
-                  </div>
-
-                  <div className="upload-input-container">
-                    <input
-                      accept="audio/*"
-                      id="icon-button-audio"
-                      type="file"
-                      style={{ display: "none" }}
-                      onChange={handleFileChange}
-                      multiple
-                    />
-                    <label htmlFor="icon-button-audio">
-                      <IconButton
-                        className="upload-icon"
-                        color="primary"
-                        component="span"
-                      >
-                        <MicNoneOutlinedIcon className="textArea__icon" />
-                      </IconButton>
-                    </label>
-                  </div>
-
-                  <div className="upload-input-container">
-                    <input
-                      accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf"
-                      id="icon-button-doc"
-                      type="file"
-                      style={{ display: "none" }}
-                      onChange={handleFileChange}
-                      multiple
-                    />
-                    <label htmlFor="icon-button-doc">
-                      <IconButton
-                        className="upload-icon"
-                        color="primary"
-                        component="span"
-                      >
-                        <AssignmentOutlinedIcon className="textArea__icon" />
-                      </IconButton>
-                    </label>
-                  </div>
-                </div>
-              </div>
+             
             </div>
 
-            <FormControl className="select-form">
-              <InputLabel id="demo-controlled-open-select">
-                Choose Question type
-              </InputLabel>
-              <Select
-                labelId="demo-controlled-open-select-label"
-                id="demo-controlled-open-select"
-                className="dropbtn"
-                value={questionType}
-                onChange={handleTypeChange}
-              >
-                <MenuItem value="Multiple Choice">
-                  <div className="option-item">
-                    <FormatListBulletedIcon />
-                    Multiple Choice
-                  </div>
-                </MenuItem>
-                <MenuItem value="Video">
-                  <div className="option-item">
-                    <VideocamOutlinedIcon />
-                    Video
-                  </div>
-                </MenuItem>
-                <MenuItem value="Audio">
-                  <div className="option-item">
-                    <MicNoneOutlinedIcon />
-                    Audio
-                  </div>
-                </MenuItem>
-                <MenuItem value="Text">
-                  <div className="option-item">
-                    <TitleIcon />
-                    Text
-                  </div>
-                </MenuItem>
-                <MenuItem value="Mcq with multiple answers">
-                  <div className="option-item">
-                    <FormatListBulletedIcon />
-                    Multiple Choice with multiple answers
-                  </div>
-                </MenuItem>
-                <MenuItem value="File">
-                  <div className="option-item">
-                    <InsertDriveFileIcon />
-                    File
-                  </div>
-                </MenuItem>
-              </Select>
-            </FormControl>
-
-            {questionType === "Multiple Choice" ? (
+          
               <div>
                 {inputList.map((x, i) => {
                   return (
-                    <div className="box">
+                    <div className="box" key={i}>
                       <div className="mcqInput">
                         <input
                           className=" mcq-input"
                           name="answer"
                           placeholder="Answer"
+                          key={i}
                           value={x.answer}
                           onChange={(e) => handleInputChange(e, i)}
                         />
@@ -325,6 +213,7 @@ function Assessment__Body() {
                           className="mcq-input"
                           name="points"
                           placeholder="Points"
+                          key={i}
                           value={x.points}
                           onChange={(e) => handleInputChange(e, i)}
                         />
@@ -351,24 +240,8 @@ function Assessment__Body() {
 
                 {/* <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div> */}
               </div>
-            ) : null}
-            <div className="assessment__roleInputContainer">
-              <label htmlFor="assessment-role-input">Enter the role : </label>
-              <input
-                type="text"
-                id="assessment-role-input"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-              />
-              <label style={{marginLeft: "10px"}} htmlFor="assessment-role-input">Enter the tag : </label>
-              <input
-                type="text"
-                
-                id="assessment-role-input"
-                value={tag}
-                onChange={(e) => setTag(e.target.value)}
-              />
-            </div>
+           
+            
             {selectedQuestion.map((item) => (
               <div>
                 <button

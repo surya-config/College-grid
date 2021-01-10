@@ -10,6 +10,7 @@ import Dropzone from "react-dropzone";
 import axios from "../../../axios";
 
 import { connect } from "react-redux";
+import MainCard from "./MainCard/MainCard";
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
@@ -26,6 +27,8 @@ function TNotes({ auth }) {
   const [errorMsg, setErrorMsg] = useState("");
   const [isPreviewAvailable, setIsPreviewAvailable] = useState(false); // state to show preview only for images
   const dropRef = useRef(); // React ref for managing the hover state of droppable area
+
+ 
 
   const removePopup = () => {
     let elem = document.querySelector(".tnotes__popup");
@@ -227,13 +230,9 @@ function TNotes({ auth }) {
             Create
           </button>
         </div>
-        {/* <div className="tnotes__list">
-          <TMainCard
-            course="Python - 17CS664 - 2020"
-            semester="6"
-            name="Nagraj A"
-          />
-        </div> */}
+        <div className="tnotes__list">
+          <TMainCard />
+        </div> 
       </div>
     </div>
   );

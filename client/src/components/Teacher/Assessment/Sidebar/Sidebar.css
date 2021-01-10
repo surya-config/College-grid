@@ -1,8 +1,8 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  flex: 0.4;
-  overflow: hidden;
+  flex: 0.35;
+  overflow: auto;
   margin-top: 30px;
   margin-left: 15px;
   /* border: 10px solid #ededed; */
@@ -10,6 +10,8 @@
   -moz-box-shadow: 0 0 10px #ededed;
   -webkit-box-shadow: 0 0 10px#ededed;
   -o-box-shadow: 0 0 10px #ededed;
+  padding:50px;
+  height:80vh;
 }
 
 .sidebar__header {
@@ -32,6 +34,8 @@
   -webkit-box-shadow: 3px 3px 11px 1px #ededed;
   -moz-box-shadow: 3px 3px 11px 1px #ededed;
   box-shadow: 3px 3px 11px 1px #ededed;
+  outline: none;
+  border: none;
 }
 
 .icon-button {
@@ -55,6 +59,7 @@
   border-radius: 50%;
   cursor: pointer;
   margin-left: -50px;
+  
 }
 
 .sidebar__headerComponents > h3 {
@@ -65,8 +70,8 @@
 }
 
 .question__card {
-  width: 90%;
-  background: #fff;
+  width: 100%;
+  background: #012E38;
   padding-left: 10px;
   /* padding-right: 10px; */
   padding-bottom: 10px;
@@ -76,6 +81,14 @@
   -webkit-box-shadow: 0px 0px 11px 1px #ededed;
   -moz-box-shadow: 0px 0px 11px 1px #ededed;
   box-shadow: 0px 0px 11px 1px #ededed;
+  margin: 20px 0;
+  text-decoration: none;
+  padding: 10px 20px
+}
+
+.question__card:hover {
+  text-decoration: none;
+  color:white;
 }
 
 .question__cardHeader {

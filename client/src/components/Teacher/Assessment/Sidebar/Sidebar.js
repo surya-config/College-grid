@@ -10,13 +10,31 @@ import MicNoneOutlinedIcon from "@material-ui/icons/MicNoneOutlined";
 import TitleIcon from "@material-ui/icons/Title";
 import InsertDriveFileIcon from "@material-ui/icons/InsertDriveFile";
 
-import axios from "../axios";
+import axios from "../../../../axios";
 import { Link, useHistory } from "react-router-dom";
+
+
+import { connect, useDispatch } from "react-redux";
+
+import {
+  setQuestionId
+} from "../../../../actions/authActions";
+
+const mapStateToProps = (state) => ({
+  question_id: state.question_id
+});
+
+
+const mapDispatchToProps = {
+  setQuestionId
+};
 
 function Sidebar() {
   const history = useHistory();
   const [questions, setQuestions] = useState([]);
   const [border, setborder] = useState(false);
+  const dispatch = useDispatch();
+
 
   useEffect(() => {
     axios.get("/questions").then((response) => {
@@ -24,17 +42,18 @@ function Sidebar() {
     });
   }, [questions]);
 
-  const addQuestion = () => {
+  const addQuestion =  () => {
     const question = {
       question: "",
       question_type: "",
     };
-    axios.post("/questions/add", question).then((res) => {
+     axios.post("/questions/add", question).then((res) => {
       console.log(res);
     });
   };
 
   const deleteQuestion = (id) => {
+    console.log("deleting")
     const qn_id = { id: id };
     console.log(qn_id);
     axios.post("/questions/delete", qn_id).then((res) => {
@@ -42,24 +61,7 @@ function Sidebar() {
     });
   };
 
-  const renderSwitch = (question_type) => {
-    switch (question_type) {
-      case "Video":
-        return <VideocamOutlinedIcon />;
-      case "Audio":
-        return <MicNoneOutlinedIcon />;
-      case "Multiple Choice":
-        return <FormatListBulletedIcon />;
-      case "Text":
-        return <TitleIcon />;
-      case "Mcq with multiple answers":
-        return <FormatListBulletedIcon />;
-      case "File":
-        return <InsertDriveFileIcon />;
-      default:
-        return null;
-    }
-  };
+  
 
   const activeCard = (id) => {
     questions.map((item) => {
@@ -88,7 +90,7 @@ function Sidebar() {
       </div>
       <div className="sidebar__body">
         {questions.map((item, index) => (
-          <Link to={`/dashboard/assessment/${item._id}`}>
+          <Link to={`/teacher/dashboard/assessment/quiz/${item._id}`} key={index} >
             <div
               tabindex="0"
               className={
@@ -96,7 +98,11 @@ function Sidebar() {
                   ? "question__card question__cardActive"
                   : "question__card question__cardInactive "
               }
-              onClick={() => activeCard(item._id)}
+             
+              onClick={() => {
+                activeCard(item._id)
+                dispatch(setQuestionId(item._id))
+              }}
             >
               <div className="question__cardHeader">
                 <h3>Question {index + 1}</h3>
@@ -109,12 +115,9 @@ function Sidebar() {
                   <DragIndicatorIcon className="question__cardHeaderIcon" />
                 </div>
               </div>
-              <div className="question__cardBody">
-                <p>{item.question}</p>
-                <div className="question__cardFooter">
-                  {renderSwitch(item.question_type)}
-                  <h6>{item.question_type}</h6>
-                </div>
+              <div className="question__cardBody" key={index}>
+                <p  key={index}>{item.question}</p>
+               
               </div>
             </div>
           </Link>
@@ -124,4 +127,5 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+

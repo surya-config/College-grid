@@ -1,7 +1,7 @@
 import axios from "../axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
-import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
+import { GET_ERRORS, SET_CURRENT_USER, SET_QUESTION, USER_LOADING } from "./types";
 
 // Register User
 export const registerStudent = (userData, history) => (dispatch) => {
@@ -24,7 +24,7 @@ export const registerTeacher = (userData, history) => (dispatch) => {
     .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data,
+        payload: err.response?.data,
       })
     );
 };
@@ -76,7 +76,7 @@ export const loginTeacher = (userData, history) => (dispatch) => {
     .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data,
+        payload: err.response?.data,
       })
     );
 };
@@ -105,4 +105,12 @@ export const logoutUser = () => (dispatch) => {
   dispatch(setCurrentUser({}));
 
   window.location.href = "/login";
+};
+
+
+export const setQuestionId = (id) => {
+  return {
+    type: SET_QUESTION,
+    payload: id,
+  };
 };

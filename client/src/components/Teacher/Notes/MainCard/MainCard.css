@@ -14,6 +14,7 @@
   display: flex;
   align-items: center;
   margin: 20px;
+  flex-wrap: wrap;
 }
 
 .tmainCard__card {

@@ -27,8 +27,8 @@ const TeacherRoom = (props) => {
   const [myPeer, setPeer] = useState(null);
   const [myPeerID, setMyPeerID] = useState(null);
   const [changeLayout, setChangeLayout] = useState(false);
-  const [showVideo, setShowVideo] = useState(true);
-  const [showAudio, setShowAudio] = useState(true);
+  const [audioMuted, setAudioMuted] = useState(true);
+  const [videoMuted, setVideoMuted] = useState(true);
   const history = useHistory();
   const handle = useFullScreenHandle();
   const roomID = props.match.params.roomID;
@@ -111,6 +111,7 @@ const TeacherRoom = (props) => {
   }, []);
 
   const connectToNewUser = (userID, stream) => {
+    console.log("new user");
     const call = peer.call(userID, stream);
     const video = document.createElement("video");
     call.on("stream", (userVideoStream) => {
@@ -127,6 +128,8 @@ const TeacherRoom = (props) => {
 
     document.getElementById("video-grid").append(video);
   };
+
+  
 
   const muteUnmute = () => {
     const enabled = myVideoStream.getAudioTracks()[0].enabled;
@@ -278,3 +281,37 @@ const TeacherRoom = (props) => {
 };
 
 export default TeacherRoom;
+
+
+// const [audioMuted, setAudioMuted] = useState(false)
+//   const [videoMuted, setVideoMuted] = useState(false)
+
+
+// myPeer.current=peer
+
+
+// function shareScreen(){
+//   navigator.mediaDevices.getDisplayMedia({cursor:true})
+//   .then(screenStream=>{
+//     myPeer.current.replaceTrack(stream.getVideoTracks()[0],screenStream.getVideoTracks()[0],stream)
+//     userVideo.current.srcObject=screenStream
+//     screenStream.getTracks()[0].onended = () =>{
+//     myPeer.current.replaceTrack(screenStream.getVideoTracks()[0],stream.getVideoTracks()[0],stream)
+//     userVideo.current.srcObject=stream
+//     }
+//   })
+// }
+
+// function toggleMuteAudio(){
+//   if(stream){
+//     setAudioMuted(!audioMuted)
+//     stream.getAudioTracks()[0].enabled = audioMuted
+//   }
+// }
+
+// function toggleMuteVideo(){
+//   if(stream){
+//     setVideoMuted(!videoMuted)
+//     stream.getVideoTracks()[0].enabled = videoMuted
+//   }
+// }

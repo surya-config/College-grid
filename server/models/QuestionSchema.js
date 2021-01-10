@@ -1,8 +1,19 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-const questionSchema = mongoose.Schema({
-  question: String,
-  question_type: String,
+
+const quizSchema = mongoose.Schema({
+  quizName:String,
+  semester:String,
+  email:String,
 });
 
-export default mongoose.model("Questions", questionSchema);
+
+// const quizSchema = mongoose.Schema({
+//   quizName:String,
+//   semester:String,
+//   questionArray = [questionSchema]
+// });
+
+
+
+module.exports = mongoose.model("Quiz", quizSchema);

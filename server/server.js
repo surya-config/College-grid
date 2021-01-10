@@ -7,6 +7,9 @@ const teachers = require("./routes/api/teachers");
 const notes = require("./routes/api/notes");
 var cors = require("cors");
 
+const Questions = require("./models/QuestionSchema")
+const Quiz = require("./models/QuestionSchema")
+
 const app = express();
 app.use(cors()); // Use this after the variable declaration
 
@@ -49,74 +52,98 @@ app.use("/api/students", students);
 app.use("/api/teachers", teachers);
 app.use("/api/notes", notes);
 
-// var questionsList = db.collection("questionsList");
 
-// app.get("/questions-list", (req, res) => {
-//   questionsList.find().toArray(function (err, data) {
-//     console.log(data);
-//     if (err) {
-//       res.status(500).send(err);
-//     } else {
-//       res.status(200).send(data);
-//     }
-//   });
-// });
+var db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function callback() {
+  console.log("Conntected To Mongo Database");
+});
 
-// app.get("/questions", (req, res) => {
-//   Questions.find((err, data) => {
-//     if (err) {
-//       res.status(500).send(err);
-//     } else {
-//       res.status(200).send(data);
-//     }
-//   });
-// });
 
-// app.post("/questions/add", (req, res) => {
-//   const question = req.body;
-//   console.log(question);
+app.get("/", (req, res) => res.status(200).send("hello world"));
 
-//   Questions.create(question, (err, data) => {
-//     if (err) {
-//       res.status(500).send(err);
-//     } else {
-//       res.status(201).send(data);
-//     }
-//   });
-// });
+var questionsList = db.collection("questionsList");
+var quizList = db.collection("quizList");
 
-// app.post("/questions/delete", (req, res) => {
-//   const id = req.body.id;
+app.get("/create-quiz", (req, res) => {
+  const details = req.body;
+  console.log({details})
 
-//   console.log(id);
+  Quiz.create(details, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(201).send(data);
+    }
+  });
+});
 
-//   Questions.findByIdAndDelete(id, (err, data) => {
-//     if (err) {
-//       res.status(500).send(err);
-//     } else {
-//       res.status(201).send(data);
-//     }
-//   });
-// });
 
-// app.post("/question/update", (req, res) => {
-//   console.log(req.body);
-//   const { id, question, questionType } = req.body;
+app.get("/questions-list", (req, res) => {
+  questionsList.find().toArray(function (err, data) {
+    console.log(data);
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
 
-//   console.log(question, questionType);
+app.get("/questions", (req, res) => {
+  Questions.find((err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
 
-//   Questions.findByIdAndUpdate(
-//     id,
-//     { question: question, question_type: questionType },
-//     (err, data) => {
-//       if (err) {
-//         res.status(500).send(err);
-//       } else {
-//         res.status(201).send(data);
-//       }
-//     }
-//   );
-// });
+app.post("/questions/add", (req, res) => {
+  const question = req.body;
+
+
+
+  Questions.create(question, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(201).send(data);
+    }
+  });
+});
+
+app.post("/questions/delete", (req, res) => {
+  const id = req.body.id;
+
+  Questions.findByIdAndDelete(id, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(201).send(data);
+    }
+  });
+});
+
+app.post("/question/update", (req, res) => {
+  console.log(req.body);
+  const { id, question, questionType } = req.body;
+
+  console.log(question, questionType);
+
+  Questions.findByIdAndUpdate(
+    id,
+    { question: question, question_type: questionType },
+    (err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(201).send(data);
+      }
+    }
+  );
+});
 
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
