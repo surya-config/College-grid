@@ -40,10 +40,8 @@ function MainAssessmentPage({ auth }) {
               semester,
               email:auth.user.email
           }
-        history.push("/teacher/dashboard/assessment/quiz")
-        axios.post("/create-quiz",details).then((res) => {
-            console.log(res);
-          });
+        history.push("/teacher/dashboard/assessment/quiz", details)
+       
       }
     
 

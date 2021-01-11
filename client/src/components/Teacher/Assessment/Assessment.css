@@ -4,6 +4,8 @@
   min-height: 100vh;
   width:70vh;
   background-color: #ededed;
+  margin-left: 20vh;
+  position: relative;
 }
 
 .assessment__container {
@@ -13,4 +15,36 @@
   min-height: 90vh;
   width: 100%;
   margin: 3% 10%;
+}
+
+.questionArray__container {
+  height:80vh;
+  width:70%;
+  padding:30px;
+  overflow: scroll;
+  background-color: white;
+}
+
+.assessment__header {
+  position: fixed;
+  top:0;
+  left:20vh;
+  width:100%;
+  height:80px;
+}
+
+
+.assessment__options1 {
+  display: flex;
+  align-items: center;
+}
+
+.assessment__options1 > input,
+.assessment__options2 > input {
+  margin: 0 50px ;
+  margin-bottom: 15px;
+  padding: 5px 10px;
+  border-radius: 12px;
+  border: 1px solid lightgrey;
+  outline: none;
 }

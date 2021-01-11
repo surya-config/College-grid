@@ -40,7 +40,7 @@ const mapDispatchToProps = {
 function Assessment__Body({question_id}) {
   const [questions, setQuestions] = useState([]);
   const [question, setQuestion] = useState([]);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState([]);
 
   const [inputList, setInputList] = useState([{ answer: "", points: "" }]);
   const { id } = useParams();
@@ -56,10 +56,7 @@ function Assessment__Body({question_id}) {
 
   useEffect(() => {
    setInput("")
-   setQuestion([...question, input])
-  }, [input])
-
-  console.log({question})
+  }, [])
 
   React.useEffect(() => {
     localStorage.setItem("questionsArray", questions)
@@ -78,11 +75,8 @@ function Assessment__Body({question_id}) {
 
   const handleQuestionChange = (e) => {
     e.preventDefault();
-
-    if(question_id === id){
-      setInput(e.target.value);
-    }
-   
+    
+    setQuestion(e.target.value);
   };
 
 
@@ -189,7 +183,7 @@ function Assessment__Body({question_id}) {
                 cols="100"
                 placeholder={selectedQn}
                 value={question}
-                defaultValue={selectedQn?.question}
+                defaultValue={selectedQn.question}
                 onChange={handleQuestionChange}
               />
              

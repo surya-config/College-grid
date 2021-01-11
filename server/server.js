@@ -62,10 +62,9 @@ db.once("open", function callback() {
 
 app.get("/", (req, res) => res.status(200).send("hello world"));
 
-var questionsList = db.collection("questionsList");
 var quizList = db.collection("quizList");
 
-app.get("/create-quiz", (req, res) => {
+app.post("/create-quiz", (req, res) => {
   const details = req.body;
   console.log({details})
 
@@ -77,6 +76,30 @@ app.get("/create-quiz", (req, res) => {
     }
   });
 });
+
+app.get("/get-quizes", (req,res) => {
+  Quiz.find((err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+})
+
+app.get("/get-quiz",  (req,res) => {
+  const id =  req.body;
+
+  console.log({id})
+
+  Quiz.findById(id,(err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+})
 
 
 app.get("/questions-list", (req, res) => {

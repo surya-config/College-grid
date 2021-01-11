@@ -5,15 +5,7 @@ const quizSchema = mongoose.Schema({
   quizName:String,
   semester:String,
   email:String,
+  questionsArray:Array
 });
-
-
-// const quizSchema = mongoose.Schema({
-//   quizName:String,
-//   semester:String,
-//   questionArray = [questionSchema]
-// });
-
-
 
 module.exports = mongoose.model("Quiz", quizSchema);

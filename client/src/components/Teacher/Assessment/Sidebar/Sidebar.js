@@ -35,6 +35,8 @@ function Sidebar() {
   const [border, setborder] = useState(false);
   const dispatch = useDispatch();
 
+  const [questionsArray, setQuestionsArray] = useState([]);
+
 
   useEffect(() => {
     axios.get("/questions").then((response) => {
@@ -78,6 +80,14 @@ function Sidebar() {
     });
   };
 
+  const handleQuestionsArray = (newValue,idx) => {
+    let item = [...questionsArray];
+    item[idx] = newValue
+    setQuestionsArray(item)
+  }
+
+  console.log({questionsArray});
+
   return (
     <div className="sidebar">
       <div className="sidebar__header">
@@ -90,7 +100,7 @@ function Sidebar() {
       </div>
       <div className="sidebar__body">
         {questions.map((item, index) => (
-          <Link to={`/teacher/dashboard/assessment/quiz/${item._id}`} key={index} >
+          <Link to={`/teacher/dashboard/assessment/quiz/${item._id}`} key={item._id} >
             <div
               tabindex="0"
               className={
@@ -98,7 +108,7 @@ function Sidebar() {
                   ? "question__card question__cardActive"
                   : "question__card question__cardInactive "
               }
-             
+              key={item._id}
               onClick={() => {
                 activeCard(item._id)
                 dispatch(setQuestionId(item._id))
@@ -115,8 +125,8 @@ function Sidebar() {
                   <DragIndicatorIcon className="question__cardHeaderIcon" />
                 </div>
               </div>
-              <div className="question__cardBody" key={index}>
-                <p  key={index}>{item.question}</p>
+              <div className="question__cardBody">
+                <p>{item.question}</p>
                
               </div>
             </div>
