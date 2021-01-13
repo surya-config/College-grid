@@ -108,7 +108,7 @@ function SNotes() {
                     </div>
                   </div>
                 ) : (
-                  <h5>There are no Notes uploaded</h5>
+                  null
                 )
             )
           ) : (

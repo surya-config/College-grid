@@ -87,8 +87,8 @@ app.get("/get-quizes", (req,res) => {
   });
 })
 
-app.get("/get-quiz",  (req,res) => {
-  const id =  req.body;
+app.post("/get-quiz",  (req,res) => {
+  const id =  req.body.id;
 
   console.log({id})
 

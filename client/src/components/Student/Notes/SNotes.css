@@ -28,6 +28,7 @@
 
 .smainCard__cardSection {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   margin: 20px;
 }
@@ -35,8 +36,8 @@
 .smainCard__card {
   border: 1px solid lightgray;
   border-radius: 12px;
-  width: 200px;
-  height: 200px;
+  width: 220px;
+  height: 220px;
   position: relative;
   margin: 20px;
   display: flex;
@@ -50,19 +51,21 @@
   align-items: center;
   padding: 20px;
   margin-bottom: 50px;
+  width:100%
 }
 
 .smainCard__cardContent > h3 {
   font-size: #444;
   font-size: 22px;
-  line-height: 0.7;
+  line-height: 1;
   margin-top: 10px;
+  text-align: center;
 }
 
 .smainCard__cardContent > p {
   white-space: nowrap;
   position: relative;
-  width: 50%;
+  width: 80%;
   overflow: hidden;
 }
 

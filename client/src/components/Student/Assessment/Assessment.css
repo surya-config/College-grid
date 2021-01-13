@@ -1,6 +1,55 @@
-.assessment {
-  border-radius: 20px;
-  background-color: white;
-  width: 100%;
-  padding: 15px;
+.sassessment {
+ margin: 50px 100px; 
+}
+
+.sassessment > h1 {
+  margin-bottom: 50px;
+}
+
+.quiz__cardSection {
+  display: flex;
+  align-items: center;
+}
+
+.sassessment__card {
+  border: 1px solid lightgray;
+  border-radius: 12px;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding:20px;
+}
+
+.sassessment__cardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
+.sassessment__cardContent > h3 {
+  font-size: #444;
+  font-size: 25px;
+  line-height: 0.7;
+  margin-top: 30px;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.sassessment__cardContent > .MuiSvgIcon-root {
+  font-size: 50px !important;
+  color: #129eaf;
+}
+
+.quiz__title {
+  text-transform: capitalize;
+}
+
+.question__card {
+  margin:20px;
 }

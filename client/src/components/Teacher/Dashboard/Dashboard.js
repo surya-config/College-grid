@@ -46,7 +46,7 @@ function TDashboard({ auth }) {
               <Route exact path="/student/dashboard/notes" component={SNotes} />
               <Route
                 exact
-                path="/student/dashboard/class/:roomID"
+                path="/room/:roomID"
                 component={TeacherRoom}
               />
               <Route exact path="/student/dashboard/room" component={Room} />
@@ -74,7 +74,7 @@ function TDashboard({ auth }) {
               <Route exact path="/teacher/dashboard/notes" component={TNotes} />
               <Route
                 exact
-                path="/teacher/dashboard/class/:roomID"
+                path="/room/:roomID"
                 component={TeacherRoom}
               />
               <Route exact path="/teacher/dashboard/class" component={TRoom} />

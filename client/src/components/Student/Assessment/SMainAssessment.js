@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Assessment.css";
 
+import AssignmentOutlinedIcon from "@material-ui/icons/AssignmentOutlined";
+
 const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,
@@ -18,14 +20,26 @@ function SMainAssessment() {
   }, [])
 
   return (
-    <div className="assessment">
+    <div className="sassessment">
       <h1>Assessment</h1>
     
+      <div className="quiz__cardSection">
       {quizes?.map(quiz => (
         <Link to={`/student/dashboard/assessment/${quiz._id}`}>
-        <h4>{quiz?.quizName}</h4>
+        
+            <div className="sassessment__card" key={quiz._id}>
+            <div className="sassessment__cardContent">
+              <AssignmentOutlinedIcon />
+              <h3>{quiz?.quizName}</h3>
+              
+            </div>
+           
+          </div>
+        
       </Link>
       ))}
+      </div>
+      
     </div>
   );
 }

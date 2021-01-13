@@ -29,6 +29,8 @@ const TeacherRoom = (props) => {
   const [changeLayout, setChangeLayout] = useState(false);
   const [audioMuted, setAudioMuted] = useState(true);
   const [videoMuted, setVideoMuted] = useState(true);
+  const [input,setInput] = useState("")
+  const [messages,setMessages] = useState([])
   const history = useHistory();
   const handle = useFullScreenHandle();
   const roomID = props.match.params.roomID;
@@ -128,6 +130,16 @@ const TeacherRoom = (props) => {
 
     document.getElementById("video-grid").append(video);
   };
+
+  const sendMessage = () => {
+    socket.emit("message", input);
+    setInput("")
+  }
+
+  socket.on("createMessage", (message) => {
+    console.log({message});
+    setMessages([...messages,message]);
+  });
 
   
 
@@ -253,14 +265,20 @@ const TeacherRoom = (props) => {
                 <h5>Chat</h5>
               </div>
               <div className="main__chat__window">
-                <ul className="messages"></ul>
+              {messages.map(msg => (
+                <h3>{msg}</h3>
+              ))}
+                
               </div>
               <div className="main__message__container">
                 <input
                   className="chat__message"
                   type="text"
                   placeholder="Type message here..."
+                  value={input}
+                  onChange={(e)=>setInput(e.target.value)}
                 />
+                <button onClick={sendMessage}>Send</button>
               </div>
             </div>
           ) : (
