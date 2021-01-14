@@ -1,5 +1,6 @@
 .sassessment {
- margin: 50px 100px; 
+ margin: 20px 100px; 
+ overflow: hidden;
 }
 
 .sassessment > h1 {
@@ -22,6 +23,11 @@
   flex-direction: column;
   align-items: center;
   padding:20px;
+}
+
+.question__card > h5 {
+  margin-bottom: 20px;
+  margin-left: -30px;
 }
 
 .sassessment__cardContent {
@@ -48,8 +54,93 @@
 
 .quiz__title {
   text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  margin-left: 300px;
+}
+
+.quiz__title > h3 {
+  font-size: 30px;
+}
+
+.quiz__title > h4 {
+  text-decoration: underline;
+  font-size: 35px;
+  margin-left: 20px;
+  margin-top: 0px;
 }
 
 .question__card {
   margin:20px;
+  margin-left: 150px;
+  margin-bottom: 50px;
+}
+
+.quiz__div {
+  height:70vh;
+  width: 50vw;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+
+.submit__button {
+  font-size: 17px;
+  font-weight: 700;
+  padding: 15px 43px 19px 44px;
+  background-image: linear-gradient(
+    to right,
+    rgb(18, 182, 155) 0%,
+    rgb(55, 236, 206) 50%,
+    rgb(1, 175, 146) 100%
+  );
+  color: white;
+  display: inline-block;
+  text-transform: capitalize;
+  background-size: 200% auto;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  border-radius: 36px;
+  border: none;
+  position: absolute;
+  bottom: 30px;
+  left:54%;
+  outline-color: aquamarine;
+  cursor: pointer;
+  margin-top: 0px;
+  outline: none;
+}
+
+.submit__button:hover {
+  background-position: right center;
+}
+
+.quiz__image {
+  position: absolute;
+  bottom: 0;
+  right:0px;
+  z-index: 0;
+}
+
+.result {
+  margin-top: 80px;
+  margin-left: 80px;
+}
+
+.result > h1 {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.result > h4 {
+  color:rgb(42, 230, 120)
+}
+
+.result__image {
+  position: absolute;
+  bottom: 0px;
+  right:200px;
+  z-index: 0;
 }

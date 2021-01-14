@@ -13,7 +13,10 @@ import MicOffOutlinedIcon from "@material-ui/icons/MicOffOutlined";
 import VideocamOutlinedIcon from "@material-ui/icons/VideocamOutlined";
 import VideocamOffOutlinedIcon from "@material-ui/icons/VideocamOffOutlined";
 
-const ENDPOINT = "http://127.0.0.1:8000";
+import $ from 'jquery';
+
+
+const ENDPOINT = "http://localhost:8000";
 
 const peer = new Peer();
 
@@ -29,12 +32,15 @@ const TeacherRoom = (props) => {
   const [changeLayout, setChangeLayout] = useState(false);
   const [audioMuted, setAudioMuted] = useState(true);
   const [videoMuted, setVideoMuted] = useState(true);
-  const [input,setInput] = useState("")
-  const [messages,setMessages] = useState([])
+  const [message,setMessage] = useState("")
+  const [input,setInput] = useState([])
+
+  const [messages, setMessages] = useState([])
   const history = useHistory();
   const handle = useFullScreenHandle();
   const roomID = props.match.params.roomID;
   var myVideoStream;
+  
 
   const cleanUp = () => {
     if (myPeer) {
@@ -71,17 +77,21 @@ const TeacherRoom = (props) => {
     navigator.mediaDevices
       .getUserMedia(constraints)
       .then((stream) => {
+       
         var video = document.createElement("video");
-
         myVideoStream = stream;
         addVideoStream(video, stream);
 
         peer.on("call", (call) => {
+
           console.log("receiving call from " + call.peer);
           call.answer(stream);
 
+          var myvideo = document.createElement("video");
+
+          
           call.on("stream", (userVideoStream) => {
-            addVideoStream(video, userVideoStream);
+            addVideoStream(myvideo, userVideoStream);
           });
         });
         socket.on("user-connected", (userId) => {
@@ -107,100 +117,137 @@ const TeacherRoom = (props) => {
       cleanUp();
     });
 
+    const connectToNewUser = (userID, stream) => {
+      console.log("new user");
+      const call = peer.call(userID, stream);
+      const video = document.createElement("video");
+      call.on("stream", (userVideoStream) => {
+        addVideoStream(video, userVideoStream);
+      });
+    };
+  
+    const addVideoStream = (video, mediaStream) => {
+      video.srcObject = mediaStream;
+  
+      video.onloadedmetadata = function (e) {
+        video.play();
+      };
+  
+      document.getElementById("video-grid").append(video);
+    };
+
+    
+
+   
+
     return () => {
       cleanUp();
     };
   }, []);
 
-  const connectToNewUser = (userID, stream) => {
-    console.log("new user");
-    const call = peer.call(userID, stream);
-    const video = document.createElement("video");
-    call.on("stream", (userVideoStream) => {
-      addVideoStream(video, userVideoStream);
-    });
-  };
-
-  const addVideoStream = (video, mediaStream) => {
-    video.srcObject = mediaStream;
-
-    video.onloadedmetadata = function (e) {
-      video.play();
-    };
-
-    document.getElementById("video-grid").append(video);
-  };
-
-  const sendMessage = () => {
-    socket.emit("message", input);
-    setInput("")
-  }
-
-  socket.on("createMessage", (message) => {
-    console.log({message});
-    setMessages([...messages,message]);
-  });
-
   
 
-  const muteUnmute = () => {
-    const enabled = myVideoStream.getAudioTracks()[0].enabled;
-    if (enabled) {
-      myVideoStream.getAudioTracks()[0].enabled = false;
-      setUnmuteButton();
-    } else {
-      setMuteButton();
-      myVideoStream.getAudioTracks()[0].enabled = true;
-    }
-  };
+  
+  // useEffect(()=>{
+  // socket.on('createMessage', message => {
+  //     console.log({message});
+  //     setMessages([...messages,message]);
+  //   });
+  // },[])
 
-  const setMuteButton = () => {
-    const html = `
-      <i class="fas fa-microphone"></i>
-      <span>Mute</span>
+  // const sendMessage = () => {
+  //   console.log({input})
+  //   socket.emit('message',input);
+  //   setInput("")
+  
+  // }
+  console.log({message});
+
+  function buttonClicked(){
+    console.log("sending ",message)
+    socket.emit("message", message);
+  }
+
+  let text = $("input");
+  $("html").keydown((e) => {
+    
+    if (e.which == 13 && text.val()?.length !== 0) {
+      
+
+      console.log(text.val());
+      socket.emit("message", message);
+      text.val("");
+
+    }
+    
+  });
+
+
+
+  const sendMessage = (message) => {
+    console.log("sending ",message)
+    if (socket) socket.emit('message', message);
+  }
+
+socket.on("createMessage", (message) => {
+  $("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
+});
+ 
+
+
+const muteUnmute = () => {
+  const enabled = myVideoStream.getAudioTracks()[0].enabled;
+  if (enabled) {
+    myVideoStream.getAudioTracks()[0].enabled = false;
+    setUnmuteButton();
+  } else {
+    setMuteButton();
+    myVideoStream.getAudioTracks()[0].enabled = true;
+  }
+};
+
+const setMuteButton = () => {
+  const html = `
+    <i class="fas fa-microphone"></i>
+    <span>Mute</span>
+    `;
+  document.querySelector(".main__mute__button").innerHTML = html;
+};
+
+const setUnmuteButton = () => {
+  const html = `
+      <i class="fas fa-microphone-slash"></i>
+      <span>Unmute</span>
       `;
-    document.querySelector(".main__mute__button").innerHTML = html;
-    document.querySelector(".main__mute__button").style.color = "white";
-  };
+  document.querySelector(".main__mute__button").innerHTML = html;
+};
 
-  const setUnmuteButton = () => {
-    const html = `
-        <i class="fas fa-microphone-slash"></i>
-        <span>Unmute</span>
-        `;
-    document.querySelector(".main__mute__button").innerHTML = html;
-    document.querySelector(".main__mute__button").style.color = "red";
-  };
+const playStop = () => {
+  const enabled = myVideoStream.getVideoTracks()[0].enabled;
+  if (enabled) {
+    myVideoStream.getVideoTracks()[0].enabled = false;
+    setPlayVideo();
+  } else {
+    setStopVideo();
+    myVideoStream.getVideoTracks()[0].enabled = true;
+  }
+};
 
-  const playStop = () => {
-    const enabled = myVideoStream.getVideoTracks()[0].enabled;
-    if (enabled) {
-      myVideoStream.getVideoTracks()[0].enabled = false;
-      setStopVideo();
-    } else {
-      setPlayVideo();
-      myVideoStream.getVideoTracks()[0].enabled = true;
-    }
-  };
+const setPlayVideo = () => {
+  const html = `
+      <i class="fas fa-video"></i>
+      <span>Stop Video</span>
+      `;
+  document.querySelector(".main__video__button").innerHTML = html;
+};
 
-  const setPlayVideo = () => {
-    const html = `
-    <i class="fas fa-video-slash"></i>
-        <span>Stop Video</span>
-        `;
-    document.querySelector(".main__video__button").innerHTML = html;
-    document.querySelector(".main__video__button").style.color = "red";
-  };
-
-  const setStopVideo = () => {
-    const html = `
-    <i class="fas fa-video"></i>
-       
-        <span>Play Video</span>
-        `;
-    document.querySelector(".main__video__button").innerHTML = html;
-    document.querySelector(".main__video__button").style.color = "white";
-  };
+const setStopVideo = () => {
+  const html = `
+      <i class="fas fa-video-slash"></i>
+      <span>Play Video</span>
+      `;
+  document.querySelector(".main__video__button").innerHTML = html;
+};
 
   return (
     <div className="classroom">
@@ -265,21 +312,18 @@ const TeacherRoom = (props) => {
                 <h5>Chat</h5>
               </div>
               <div className="main__chat__window">
-              {messages.map(msg => (
-                <h3>{msg}</h3>
-              ))}
-                
+              <ul class="messages"></ul>
               </div>
-              <div className="main__message__container">
-                <input
-                  className="chat__message"
-                  type="text"
-                  placeholder="Type message here..."
-                  value={input}
-                  onChange={(e)=>setInput(e.target.value)}
-                />
-                <button onClick={sendMessage}>Send</button>
-              </div>
+              <div class="main__message__container">
+          <input
+            type="text"
+            placeholder="Type message here..."
+            value={message}
+            onChange={(e)=>setMessage(e.target.value)}
+
+          />
+          <button onClick={()=> sendMessage(message)}>Send</button>
+        </div>
             </div>
           ) : (
             <div className="main__right">

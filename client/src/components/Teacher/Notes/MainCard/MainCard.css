@@ -53,7 +53,7 @@
 
 .tmainCard__cardContent > .MuiSvgIcon-root {
   font-size: 40px !important;
-  color: #129eaf;
+  color: rgb(211, 167, 24);
 }
 
 .tmainCard__cardDownload {
@@ -65,7 +65,7 @@
   align-items: center;
   justify-content: center;
 
-  background-color: #129eaf;
+  background-color:rgb(4, 69, 71);
   padding: 8px;
 
   border-bottom-left-radius: 12px;

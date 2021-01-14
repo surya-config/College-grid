@@ -1,12 +1,13 @@
 .create-room {
   margin-top: 15%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* justify-content: space-around; */
+  /* bottom: 50%; */
 }
 
-.create-room-btn {
+/* .create-room-btn {
   margin-top: 10px;
   padding: 7px;
   font-size: 20px;
@@ -14,4 +15,43 @@
   border-radius: 5%;
   letter-spacing: 1px;
   word-spacing: 2px;
+} */
+
+.create-room-btn {
+  font-size: 17px;
+  font-weight: 700;
+  padding: 15px 43px 19px 44px;
+  background-image: linear-gradient(
+    to right,
+    rgb(18, 182, 155) 0%,
+    rgb(55, 236, 206) 50%,
+    rgb(1, 175, 146) 100%
+  );
+  color: white;
+  display: inline-block;
+  text-transform: capitalize;
+  background-size: 200% auto;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  border-radius: 36px;
+  border: none;
+  position: absolute;
+  bottom: 80%;
+  left:80%;
+  outline-color: aquamarine;
+  cursor: pointer;
+  margin-top: 0px;
+  outline: none;
 }
+
+.create-room-btn:hover {
+  background-position: right center;
+}
+
+
+
+
+/* https://image.freepik.com/free-vector/illustration-graduation-hat_53876-5920.jpg */

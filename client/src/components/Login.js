@@ -153,7 +153,8 @@ function Login({ auth, errors }) {
         <div className="login__container">
           <img
             className="login__logo"
-            src="https://theactingcenterla.com/wp-content/uploads/2020/03/facetime-transparent-17.png"
+            src="/Images/university.svg"
+            // src="https://image.freepik.com/free-vector/illustration-graduation-hat_53876-5920.jpg"
             alt="FaceTime"
           />
           <div className="login__leftContainer">
@@ -248,11 +249,11 @@ function Login({ auth, errors }) {
         </div>
       ) : (
         <div className="signup__container">
-          <img
-            className="signup__logo"
-            src="https://theactingcenterla.com/wp-content/uploads/2020/03/facetime-transparent-17.png"
-            alt="FaceTime"
-          />
+        <img
+        className="signup__logo"
+        src="/Images/university.svg"
+        alt="FaceTime"
+      />
           <div className="signup__leftContainer">
             <div className="signup__leftContainerContent">
               <h2>Login</h2>

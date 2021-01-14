@@ -7,6 +7,8 @@ const teachers = require("./routes/api/teachers");
 const notes = require("./routes/api/notes");
 var cors = require("cors");
 
+const port = process.env.port || 8000
+
 const Questions = require("./models/QuestionSchema")
 const Quiz = require("./models/QuestionSchema")
 
@@ -177,12 +179,13 @@ io.on("connection", (socket) => {
     console.log("joined");
     socket.join(roomId);
     socket.to(roomId).broadcast.emit("user-connected", userId);
-    socket.on("message", (message) => {
+    socket.on("message", message => {
+      console.log(message)
       io.to(roomId).emit("createMessage", message);
     });
   });
 });
 
-server.listen(8000, () => {
-  console.log("Listening to port 8000");
+server.listen(port, () => {
+  console.log(`Listening to port ${port}`);
 });

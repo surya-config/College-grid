@@ -30,9 +30,11 @@ const Navbar = ({ auth }) => {
 
   return (
     <nav className="navbar">
+    <img src="https://www.flaticon.com/svg/vstatic/svg/3135/3135755.svg?token=exp=1610638328~hmac=a664736e7a66238345726d4645ef7dcc" alt="" />
       {auth.user.usn ? (
         <div className="navbar__container">
-          <h4>{auth.user.name}</h4>
+        
+          <h4 className="navbar__userName">{auth.user.name}</h4>
           <h5 className="navbar__usn">{auth.user.usn}</h5>
           <NavLink
             activeClassName="navbar__link--active"

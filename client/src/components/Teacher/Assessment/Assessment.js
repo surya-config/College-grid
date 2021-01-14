@@ -59,8 +59,8 @@ function TAssessment(props) {
   return (
     <div className="assessment">
       <div className="assessment__header">
-      <h1>Quiz Name</h1>
-      <button onClick={()=>{
+      <h1>Quiz Name :</h1>
+      <button className="assessment__quizButton" onClick={()=>{
         setQuestionsArray([...questionsArray, data]) 
        }}>+</button>
       </div>
@@ -140,7 +140,7 @@ function TAssessment(props) {
         </div>
         ))}
         </div>
-      <button onClick={submitDetails}>Submit</button>
+      <button className="assessment__submitButton" onClick={submitDetails}>Submit</button>
     </div>
   );
 }

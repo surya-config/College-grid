@@ -9,13 +9,14 @@ const CreateRoom = () => {
 
   function create() {
     const id = uuid();
-    history.push(`/teacher/dashboard/class/${id}`);
+    history.push(`/room/${id}`);
   }
 
   return (
     <div>
+    <img src="https://image.freepik.com/free-vector/online-courses-illustration-concept_23-2148525395.jpg" alt="" />
       <div className="create-room">
-        <h3>Host a Video Chat</h3>
+        
         <button className="create-room-btn" onClick={create}>
           Create room
         </button>
