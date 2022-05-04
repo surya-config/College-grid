@@ -22,8 +22,8 @@ background-size: cover;
   height: 100px;
   object-fit: contain;
   position: absolute;
-  top: -28px;
-  left: 0;
+  top: 40px;
+  left: 20px;
   z-index: 999;
   margin-left: 10px;
 }

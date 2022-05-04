@@ -149,14 +149,16 @@ function Login({ auth, errors }) {
 
   return (
     <div className="login">
-      {switchBar === false ? (
-        <div className="login__container">
-          <img
+       <img
             className="login__logo"
-            src="/Images/university.svg"
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135810.png"
             // src="https://image.freepik.com/free-vector/illustration-graduation-hat_53876-5920.jpg"
+            // /Images/university.svg
             alt="FaceTime"
           />
+      {switchBar === false ? (
+        <div className="login__container">
+         
           <div className="login__leftContainer">
             <div className="login__imageOverlay"></div>
             <div className="login__leftContainerContent">
@@ -249,11 +251,18 @@ function Login({ auth, errors }) {
         </div>
       ) : (
         <div className="signup__container">
-        <img
+        {/* <img
         className="signup__logo"
         src="/Images/university.svg"
         alt="FaceTime"
-      />
+      /> */}
+       {/* <img
+            className="login__logo"
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135810.png"
+            // src="https://image.freepik.com/free-vector/illustration-graduation-hat_53876-5920.jpg"
+            // /Images/university.svg
+            alt="FaceTime"
+          /> */}
           <div className="signup__leftContainer">
             <div className="signup__leftContainerContent">
               <h2>Login</h2>
@@ -328,7 +337,6 @@ function Login({ auth, errors }) {
               </Button>
             </div>
           </div>
-
           <div className="signup__rightContainer">
             <div className="signup__imageOverlay"></div>
             <div className="signup__rightContainerContent">
