@@ -30,7 +30,11 @@ const Navbar = ({ auth }) => {
 
   return (
     <nav className="navbar">
-    <img src="https://www.flaticon.com/svg/vstatic/svg/3135/3135755.svg?token=exp=1610638328~hmac=a664736e7a66238345726d4645ef7dcc" alt="" />
+    {/* 
+      1. https://cdn-icons-png.flaticon.com/512/3135/3135810.png 
+      2. https://cdn-icons-png.flaticon.com/512/3829/3829933.png
+    */}
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135810.png" alt="Logo" />
       {auth.user.usn ? (
         <div className="navbar__container">
         
