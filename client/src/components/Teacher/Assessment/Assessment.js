@@ -1,16 +1,9 @@
-import { Input } from "@material-ui/core";
 import React,{useState} from "react";
-
 import "./Assessment.css";
-import Assessment__Body from "./Assessment__Body/Assessment__Body";
-import Sidebar from "./Sidebar/Sidebar";
-
 import axios from "../../../axios"
-
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -58,13 +51,6 @@ function TAssessment(props) {
 
   return (
     <div className="assessment">
-      <div className="assessment__header">
-      <h1>Quiz Name :</h1>
-      <button className="assessment__quizButton" onClick={()=>{
-        setQuestionsArray([...questionsArray, data]) 
-       }}>+</button>
-      </div>
-
       <div className="questionArray__container">
       {questionsArray?.map((item, idx) => (
         <div className="question__card" key={idx}>
@@ -113,13 +99,9 @@ function TAssessment(props) {
             item[idx].option4 = e.target.value;
             setQuestionsArray(item)
           }} />
-
           </div>
-
-         
-     
       </div>  
-      <FormControl className={classes.formControl}>
+      <FormControl fullWidth className={classes.formControl}>
       <InputLabel id="demo-simple-select-label">Answer Option</InputLabel>
       <Select
         labelId="demo-simple-select-label"
@@ -140,7 +122,12 @@ function TAssessment(props) {
         </div>
         ))}
         </div>
-      <button className="assessment__submitButton" onClick={submitDetails}>Submit</button>
+        <div className="assessment__CTAContainer">
+        <button className="assessment__CTA" onClick={()=>{
+        setQuestionsArray([...questionsArray, data]) 
+       }}>Add Question</button>
+      <button className="assessment__CTA" onClick={submitDetails}>Submit</button>
+      </div>
     </div>
   );
 }

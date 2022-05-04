@@ -1,12 +1,9 @@
 
 import React,{useState} from 'react'
 import { useHistory } from 'react-router-dom';
-
-import CancelIcon from "@material-ui/icons/Cancel";
-
-import axios from '../../../axios'
-
 import { connect } from "react-redux";
+import CancelIcon from "@material-ui/icons/Cancel";
+import AddIcon from "@material-ui/icons/Add";
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
@@ -102,8 +99,11 @@ function MainAssessmentPage({ auth }) {
             </div>
           </div>
         </div>
-            <h1>Main Page</h1>
-            <button onClick={addPopup}>Add Quiz</button>
+            
+            <button className="tnotes__createButton" onClick={addPopup}>
+              <AddIcon />
+              Add Quiz
+            </button>
         </div>
     )
 }
